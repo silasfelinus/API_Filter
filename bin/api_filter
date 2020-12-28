@@ -1,0 +1,8 @@
+#!/usr/bin/env ruby
+
+puts "Welcome to the API Filter!"
+puts "What do you want to do?"
+
+puts "1. Choose API Source (CURRENTLY Google)"
+puts "2. Choose Filter (CURRENTLY Pirate)"
+puts "3. "
