@@ -6,7 +6,7 @@ Gem::Specification.new do |spec|
   spec.name          = "api_filter"
   spec.version       = ApiFilter::VERSION
   spec.authors       = ["silasfelinus"]
-  spec.email         = ["silasfelinus@gmail.com"]
+  spec.email         = ["silasfelinus@gmail.com"] 
 
   spec.summary       = "Filters text-based API responses (jokes, chatbots, quotes, etc) through a selection of translation and dialect"
   spec.homepage      = "https://github.com/silasfelinus/api_filter"
