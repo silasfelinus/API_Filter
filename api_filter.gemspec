@@ -4,7 +4,7 @@ require_relative "lib/api_filter/version"
 
 Gem::Specification.new do |spec|
   spec.name          = "api_filter"
-  spec.version       = ApiFilter::VERSION
+  spec.version       = API_Filter::VERSION
   spec.authors       = ["silasfelinus"]
   spec.email         = ["silasfelinus@gmail.com"] 
 
@@ -31,6 +31,15 @@ Gem::Specification.new do |spec|
 
   # Uncomment to register a new dependency of your gem
   # spec.add_dependency "example-gem", "~> 1.0"
+
+ spec.add_dependency "rake", "~> 13.0"
+
+ spec.add_dependency "rspec", "~> 3.0"
+
+ spec.add_dependency "rubocop", "~> 0.80"
+
+ spec.add_dependency 'pry', '~> 0.13.1'
+
 
   # For more information and examples about making a new gem, checkout our
   # guide at: https://bundler.io/guides/creating_gem.html
