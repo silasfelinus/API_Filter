@@ -40,6 +40,21 @@ class API_Filter::CLI
     @loop_counter = @default_loop_counter
   end
 
+  def set_loop_counter
+    #Change Loop Counter
+    system('clear')
+    puts "How many times do you want to run the filter?"
+    user_input = nil
+
+    until user_input.to_i.to_s == user_input && user_input.to_i <= @source.maximum_loop_counter && user_input.to_i > 0
+      puts "Please input an integer between 1 and #{@source.maximum_loop_counter}."
+      user_input = gets.chomp
+    end
+
+    @loop_counter = user_input
+
+  end
+
     
 
   def call
@@ -60,18 +75,28 @@ class API_Filter::CLI
     case user_input
         
     when "1"
-      #Choose API Sources 
+      set_source
 
     when "2"
-      #Choose Filter
+      set_filter
 
     when "3"
-      #Change Loop Toggle
+      set_loop_counter
 
     when "4"
-      #Run Filter
-
+      process_filter
     end
+
+
+  end
+
+  def process_filter
+    #processes source/filter handshakes
+
+  end
+
+  def output_results(results)
+    results.each do {|result| puts result}
   end
 
 
