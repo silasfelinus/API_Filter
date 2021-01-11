@@ -119,7 +119,7 @@ class API_Filter::CLI
   def process_filter
     #gets the text(s) from source and translation(s) from the filter
     texts = @source.request(@loop_counter)
-    results = filter(texts)
+    results = @filter.translate(texts)
     output_results(results)
   end
 
