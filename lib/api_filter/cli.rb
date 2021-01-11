@@ -1,4 +1,3 @@
-require_relative "./api_filter/filter"
 require_relative "./api_filter/source"
 
 class API_Filter::CLI
@@ -6,6 +5,7 @@ class API_Filter::CLI
   attr_accessor :default_source, :current_source, 
                 :default_filter, :current_filter, 
                 :default_loop_counter, :current_loop_counter
+                :results
   
   def welcome_user
     #Welcome the user and list menu options
@@ -20,18 +20,21 @@ class API_Filter::CLI
 
     puts "1. Choose API Source (CURRENTLY #{@default_source.name})"
     puts "2. Choose Filter (CURRENTLY #{@default_filter.name})"
-    puts "3. Change Loop Amount (CURRENTLY 1)"
+    puts "3. Change Loop Amount (CURRENTLY #{@current_loop_counter})"
     puts "4. See What Happens\n"
     puts "\n"
     puts "I want to help,"
   end
+
 
   def set_defaults
     #sets default values
     @default_source = Source.new
     @default_filter = Filter.new
     @default_loop_counter = 1
+    @results = []
   end
+
 
   def reset_variables
     #resets variables to default values
@@ -40,31 +43,52 @@ class API_Filter::CLI
     @loop_counter = @default_loop_counter
   end
 
+  def reset_results
+    @results = []
+  end
+
+
+
   def set_loop_counter
-    #Change Loop Counter
+    #set Loop Counter based on user prompt
     system('clear')
     puts "How many times do you want to run the filter?"
     user_input = nil
+    until user_input.to_i.to_s == user_input && user_input.to_i <= @source.max_loop_counter.to_i && user_input.to_i > 0
+      puts "Please input an integer between 1 and #{@source.max_loop_counter}."
+      user_input = gets.chomp
+    end
+    @loop_counter = user_input
+  end
 
-    until user_input.to_i.to_s == user_input && user_input.to_i <= @source.maximum_loop_counter && user_input.to_i > 0
-      puts "Please input an integer between 1 and #{@source.maximum_loop_counter}."
+
+  def set_default(object)
+    #displays a list of objects and selects the default option
+    object.list_options
+    user_input = nil
+    until object.is_valid?(user_input)
+      puts "Please choose an integer between 1 and #{object.all.length()}"
       user_input = gets.chomp
     end
 
-    @loop_counter = user_input
+    object.set_default(user_input)
 
   end
 
-    
+
+
 
   def call
-
-    #Initialize variables
+    #Initialize variables and handles menu loop
     set_defaults
     reset_variables
 
-    #Welcome user and get input
     welcome_user
+    handle_input
+  end
+
+
+  def handle_input
     valid_answers = ["1", "2", "3", "4"]
     user_input = nil
     until valid_answers.include?(user_input)
@@ -72,28 +96,33 @@ class API_Filter::CLI
       user_input = gets.chomp
     end
 
-    case user_input
-        
+    #1 Choose API Source
+    #2. Choose Filter
+    #3. Change Loop Amount
+    #4. Process Filter
+
+    case user_input  
     when "1"
-      set_source
-
+      set_default(@source)
     when "2"
-      set_filter
-
+      set_default()
     when "3"
       set_loop_counter
-
     when "4"
       process_filter
     end
-
+  end
 
   end
+
 
   def process_filter
-    #processes source/filter handshakes
-
+    #gets the text(s) from source and translation(s) from the filter
+    texts = @source.request(@loop_counter)
+    results = filter(texts)
+    output_results(results)
   end
+
 
   def output_results(results)
     results.each do {|result| puts result}
