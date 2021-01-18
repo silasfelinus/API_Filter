@@ -18,36 +18,43 @@ class API_Filter::Source
 
   def self.all
     @@all
+
   end
 
   def save
     @@all << self
   end
 
+  def list_filters
+    @@filters.each {|filter| filter}
+  end
 
-  def loop_counter = (integer)
-    if integer <= 1
+  def list_sources
+    @@sources.each {|source| source}
+  end
+
+
+
+  def loop_counter=(value)
+    if value <= 1
       @loop_counter = 1
-    elsif integer > @max_loop_counter
+    elsif value > @max_loop_counter
       @loop_counter = @max_loop_counter
     else
-      @loop_counter = integer
+      @loop_counter = value
     end
     @loop_counter
   end
 
   def request(counter)
     #Run Source API
-    counter.times {"API Source Text"}
+    #counter.times {"API Source Text"}
+    "API Source text"
   end
 
   def translate(text)
     #run translate API
     text.upcase
   end
-
-
-
-
 
 end

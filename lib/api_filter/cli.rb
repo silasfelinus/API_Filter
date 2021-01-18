@@ -1,12 +1,10 @@
-require_relative "./api_filter/source"
+#require_relative "./source"
 
 class API_Filter::CLI
   #CLI interface for the Source/Filter transaction
-  attr_accessor :default_source, :current_source, 
-                :default_filter, :current_filter, 
-                :default_loop_counter, :current_loop_counter
-                :results
+  attr_accessor :source, :filter, :loop_counter, :results
   
+
   def welcome_user
     #Welcome the user and list menu options
     system('clear')
@@ -18,101 +16,76 @@ class API_Filter::CLI
     puts "Silas Knight at silasfelinus@gmail.com\n"
     puts "\n"
 
-    puts "1. Choose API Source (CURRENTLY #{@default_source.name})"
-    puts "2. Choose Filter (CURRENTLY #{@default_filter.name})"
-    puts "3. Change Loop Amount (CURRENTLY #{@current_loop_counter})"
+    puts "1. Choose API Source (CURRENTLY #{@source.name})"
+    puts "2. Choose Filter (CURRENTLY #{@filter.name})"
+    puts "3. Change Loop Amount (CURRENTLY #{@loop_counter})"
     puts "4. See What Happens\n"
+    puts "5. Quit\n"
     puts "\n"
     puts "I want to help,"
   end
 
 
-  def set_defaults
-    #sets default values
-    @default_source = Source.new
-    @default_filter = Filter.new
-    @default_loop_counter = 1
-    @results = []
-  end
-
-
   def reset_variables
-    #resets variables to default values
-    @source = @default_source
-    @filter = @default_filter
-    @loop_counter = @default_loop_counter
-  end
-
-  def reset_results
+    #sets variables to default values
+    @source = API_Filter::Source.new
+    @filter = API_Filter::Source.new
+    @loop_counter = 1
     @results = []
   end
 
+
+  def get_integer(min, max)
+    #asks user for input until receiving a valid integer
+    user_input = nil
+    until user_input.to_i.to_s == user_input && user_input.to_i <= max && user_input.to_i >= min
+      puts "Please input an integer between #{min} and #{max}."
+      user_input = gets.chomp
+    end
+    user_input.to_i
+  end
 
 
   def set_loop_counter
     #set Loop Counter based on user prompt
     system('clear')
     puts "How many times do you want to run the filter?"
-    user_input = nil
-    until user_input.to_i.to_s == user_input && user_input.to_i <= @source.max_loop_counter.to_i && user_input.to_i > 0
-      puts "Please input an integer between 1 and #{@source.max_loop_counter}."
-      user_input = gets.chomp
-    end
-    @loop_counter = user_input
+    @loop_counter = get_integer(1, @source.max_loop_counter)
   end
-
-
-  def set_default(object)
-    #displays a list of objects and selects the default option
-    object.list_options
-    user_input = nil
-    until object.is_valid?(user_input)
-      puts "Please choose an integer between 1 and #{object.all.length()}"
-      user_input = gets.chomp
-    end
-
-    object.set_default(user_input)
-
-  end
-
-
 
 
   def call
     #Initialize variables and handles menu loop
-    set_defaults
     reset_variables
-
     welcome_user
     handle_input
   end
 
 
   def handle_input
-    valid_answers = ["1", "2", "3", "4"]
-    user_input = nil
-    until valid_answers.include?(user_input)
-      puts "please input a number between 1 and #{valid_answers.length()}."
-      user_input = gets.chomp
-    end
+    valid_answers = ["1", "2", "3", "4", "5"]
+    selection = get_integer(1, valid_answers.length())
 
     #1 Choose API Source
     #2. Choose Filter
     #3. Change Loop Amount
     #4. Process Filter
+    #5. Quit
 
-    case user_input  
+    case selection
     when "1"
-      set_default(@source)
+      Source.list_sources
+      @source = Source.sources[get_integer(1, Source.sources.length())-1]
+      puts "Your current source is #{@source.name}"
     when "2"
-      set_default()
+      Source.list_filters
+      @filter = Source.filters[get_integer(1, Source.filters.length())-1]
+      puts "Your current source is #{@filter.name}"
     when "3"
       set_loop_counter
     when "4"
       process_filter
     end
-  end
-
   end
 
 
@@ -125,8 +98,6 @@ class API_Filter::CLI
 
 
   def output_results(results)
-    results.each do {|result| puts result}
+    results.each {|result| puts result}
   end
-
-
 end
