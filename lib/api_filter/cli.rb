@@ -1,8 +1,11 @@
-#require_relative "./source"
+require_relative "./source"
+require_relative "./manager"
+
 
 class API_Filter::CLI
   #CLI interface for the Source/Filter transaction
   attr_accessor :source, :filter, :loop_counter, :results
+  @@text = "It was the best of times, it was the worst of times"
   
 
   def welcome_user
@@ -15,22 +18,13 @@ class API_Filter::CLI
     puts "Feedback can be sent to my friend"
     puts "Silas Knight at silasfelinus@gmail.com\n"
     puts "\n"
-
-    puts "1. Choose API Source (CURRENTLY #{@source.name})"
-    puts "2. Choose Filter (CURRENTLY #{@filter.name})"
-    puts "3. Change Loop Amount (CURRENTLY #{@loop_counter})"
-    puts "4. See What Happens\n"
-    puts "5. Quit\n"
-    puts "\n"
-    puts "I want to help,"
   end
 
 
   def reset_variables
     #sets variables to default values
-    @source = API_Filter::Source.new
-    @filter = API_Filter::Source.new
-    @loop_counter = 1
+    @source = API_Filter::Source.default_source
+    @filter = API_Filter::Source.default_filter
     @results = []
   end
 
@@ -46,47 +40,59 @@ class API_Filter::CLI
   end
 
 
-  def set_loop_counter
-    #set Loop Counter based on user prompt
-    system('clear')
-    puts "How many times do you want to run the filter?"
-    @loop_counter = get_integer(1, @source.max_loop_counter)
-  end
-
-
   def call
     #Initialize variables and handles menu loop
     reset_variables
     welcome_user
-    handle_input
-  end
 
-
-  def handle_input
     valid_answers = ["1", "2", "3", "4", "5"]
-    selection = get_integer(1, valid_answers.length())
 
-    #1 Choose API Source
-    #2. Choose Filter
-    #3. Change Loop Amount
-    #4. Process Filter
-    #5. Quit
+    we_are_done = false
+    while we_are_done == false
+      system('clear')
 
-    case selection
-    when "1"
-      Source.list_sources
-      @source = Source.sources[get_integer(1, Source.sources.length())-1]
-      puts "Your current source is #{@source.name}"
-    when "2"
-      Source.list_filters
-      @filter = Source.filters[get_integer(1, Source.filters.length())-1]
-      puts "Your current source is #{@filter.name}"
-    when "3"
-      set_loop_counter
-    when "4"
-      process_filter
+      puts "1. Choose text SOURCE (CURRENTLY #{@source[0]})"
+      puts "2. Choose text FILTER (CURRENTLY #{@filter[0]})"
+      puts "3. Get new text from SOURCE."
+      puts "4. Send current text to FILTER"
+      puts "5. Quit\n"
+      puts "\n"
+      display_text
+      selection = get_integer(1, valid_answers.length())
+
+
+      case selection
+      when 1
+        puts "Available APIs:"
+        API_Filter::Source.sources.each {|source| puts "#{source[0]} \n"}
+        @source = API_Filter::Source.sources[get_integer(1, API_Filter::Source.sources.length()) - 1]
+        puts "Your current source is #{@source[0]}"
+        pause_for_effect
+      when 2
+        puts "Available filters:"
+        API_Filter::Source.filters.each {|filter| puts "#{filter[0]}"}
+        @filter = API_Filter::Source.filters[get_integer(1, API_Filter::Source.filters.length()) - 1]
+        puts "Your current filter is #{@filter[0]}"
+        pause_for_effect
+
+      when 3
+        set_loop_counter
+      when 4
+        process_filter
+      when 5
+      we_are_done = true
+      end
     end
   end
+
+  def pause_for_effect
+    #pause cli action until user presses any key
+    puts "Press any key to continue"
+    gets.chomp
+  end
+
+  def display_text
+
 
 
   def process_filter

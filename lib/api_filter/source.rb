@@ -1,49 +1,39 @@
 class API_Filter::Source
-  attr_accessor :name, :link, :max_loop_counter, :default_source, :default_filter
-  attr_reader :loop_counter
+  attr_accessor :name, :link
   @@all = []
-  @@filters = ["Pirate Filter", "pirate filter url", 1]
-  @@sources = ["Joke a Day", "joke url", 1]
+  @@sources = [["Joke a Day", "joke url", 1], ["Famous Quotes", "Famous Quotes URL", 2]]
+  @@filters = [["Pirate Filter", "pirate filter url", 1], ["Meow Filter", "meow filter url", 2]]
   @@default_filter = @@filters[0]
   @@default_source = @@sources[0]
-  LOOP_CEILING = 999
   
-  def initialize (name = "default", link = nil, loop_counter = 1, max_loop_counter = LOOP_CEILING)
+  def initialize (name = "default", link = nil)
     @name = name
     @link = link
-    @loop_counter = loop_counter
-    @max_loop_counter = max_loop_counter
     save
   end
 
   def self.all
     @@all
+  end
 
+  def self.default_source
+    @@default_source
+  end
+
+  def self.default_filter
+    @@default_filter
   end
 
   def save
     @@all << self
   end
 
-  def list_filters
-    @@filters.each {|filter| filter}
+  def self.filters
+    @@filters
   end
 
-  def list_sources
-    @@sources.each {|source| source}
-  end
-
-
-
-  def loop_counter=(value)
-    if value <= 1
-      @loop_counter = 1
-    elsif value > @max_loop_counter
-      @loop_counter = @max_loop_counter
-    else
-      @loop_counter = value
-    end
-    @loop_counter
+  def self.sources
+    @@sources
   end
 
   def request(counter)
