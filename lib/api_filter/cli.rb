@@ -4,7 +4,7 @@ require_relative "./manager"
 
 class API_Filter::CLI
   #CLI interface for the Source/Filter transaction
-  attr_accessor :source, :filter, :loop_counter, :results
+  attr_accessor :source, :filter, :manager, :results
   @@text = "It was the best of times, it was the worst of times"
   
 
@@ -25,6 +25,7 @@ class API_Filter::CLI
     #sets variables to default values
     @source = API_Filter::Source.default_source
     @filter = API_Filter::Source.default_filter
+    @manager = API_Filter::Manager.new
     @results = []
   end
 
@@ -92,6 +93,18 @@ class API_Filter::CLI
   end
 
   def display_text
+    puts "**************************************\n"
+    puts "**************************************\n"
+    puts "**************************************\n"
+    puts "\n"
+    puts "CURRENT TEXT:\n"
+    puts "\n"
+    puts "#{@manager.current_text}\n"
+    puts "\n\n"
+    puts "**************************************\n"
+    puts "**************************************\n"
+    puts "**************************************\n"
+  end
 
 
 
