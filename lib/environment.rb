@@ -1,6 +1,5 @@
 require_relative "./api_filter/version"
 require_relative "./api_filter/cli"
-require_relative "./api_filter/source"
 require_relative "./api_filter/manager"
 require 'pry'
 

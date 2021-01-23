@@ -1,18 +1,15 @@
-require_relative "./source"
-
 class API_Filter::Manager
   attr_accessor :name, :link, :current_text
+  @@sources = [["Joke a Day", "joke url"], ["Famous Quotes", "Famous Quotes URL"]]
+  @@filters = [["Pirate Filter", "pirate filter url"], ["Meow Filter", "meow filter url"]]
+  @@default_text = "It was the best of times, it was the worst of times"
   @@all = []
-  @@sources = [["Joke a Day", "joke url", 1], ["Famous Quotes", "Famous Quotes URL", 2]]
-  @@filters = [["Pirate Filter", "pirate filter url", 1], ["Meow Filter", "meow filter url", 2]]
-  @@default_filter = @@filters[0]
-  @@default_source = @@sources[0]
-  @@current_text = "It was the best of times, it was the worst of times"
-  @@text_history = [@@current_text]
   
-  def initialize (name = "default", link = nil)
-    @name = name
-    @link = link
+  def initialize (current_text = @@default_text, source = @@sources[0], filter = @@filters[0])
+    @current_text = current_text
+    @source = source
+    @filter = filter
+    @text_history << @text
     save
   end
 
