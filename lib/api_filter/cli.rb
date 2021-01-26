@@ -4,7 +4,12 @@ require_relative "./manager"
 class API_Filter::CLI
   #CLI interface for the Source/Filter transaction
   attr_accessor :manager, :results
-  
+
+
+  def reset_variables
+    @manager = API_Filter::Manager.new
+    @results = []
+  end
 
   def welcome_user
     #Welcome the user and list menu options
@@ -19,11 +24,7 @@ class API_Filter::CLI
   end
 
 
-  def reset_variables
-    #sets variables to default values
-    @manager = API_Filter::Manager.new
-    @results = []
-  end
+
 
 
   def get_integer(min, max)
@@ -40,13 +41,13 @@ class API_Filter::CLI
   def display_text
     puts "**************************************\n"
     puts "CURRENT TEXT:\n\n"
-    puts "#{@manager.current_text}\n"
+    puts "#{@manager.current_text}\n\n"
     puts "**************************************\n"
   end
 
   def pause_for_effect
     #pause cli action until user presses any key
-    puts "Press any key to continue"
+    puts "Press enter to continue"
     gets.chomp
     system('clear')
   end
@@ -55,8 +56,8 @@ class API_Filter::CLI
     system('clear')
     puts "AVAILABLE APIS:\n"
     API_Filter::Manager.sources.each {|source| puts "#{source[0]} \n"}
-    @source = API_Filter::Manager.sources[get_integer(1, API_Filter::Source.sources.length()) - 1]
-    puts "Your current source is #{@source[0]}"
+    @source = API_Filter::Manager.sources[get_integer(1, API_Filter::Manager.sources.length()) - 1]
+    puts "Your current source is #{@manager.source[0]}"
     pause_for_effect
   end
 
@@ -64,17 +65,17 @@ class API_Filter::CLI
     system('clear')
     puts "AVAILABLE FILTERS:\n"
     API_Filter::Manager.filters.each {|filter| puts "#{filter[0]}"}
-    @filter = API_Filter::Manager.filters[get_integer(1, API_Filter::Source.filters.length()) - 1]
-    puts "Your current filter is #{@filter[0]}"
+    @filter = API_Filter::Manager.filters[get_integer(1, API_Filter::Manager.filters.length()) - 1]
+    puts "Your current filter is #{@manager.filter[0]}"
     pause_for_effect
   end
 
   def get_new_text
     #Returns fresh text from Source
     system('clear')
-    puts "Getting fresh text from #{@manger.source[0]}:"
+    puts "[Source] = '#{@manager.source[0]}'\n\n"
     new_text = @manager.get_new_text
-    puts "#{new_text}"
+    puts "[Text Received] = '#{new_text}'\n\n"
     pause_for_effect
   end
 
@@ -83,12 +84,9 @@ class API_Filter::CLI
     #Sends current text to Filter &
     #Returns filter's reply
     system('clear')
-    puts "Sending:\n"
-    puts "#{@manger.current_text}\n\n"
-    puts "Receiving new text\n\n"
+    puts "[Text Sent] = '#{@manager.current_text}'\n\n"
     new_text = @manager.send_current_text
-    puts "Received:\n"
-    puts "#{new_text}"
+    puts "[Text Received] = '#{new_text}'\n\n"
     pause_for_effect
   end
 
@@ -102,9 +100,9 @@ def call
 
   we_are_done = false
   while we_are_done == false
-    puts "1. Choose text SOURCE (CURRENTLY #{@source[0]})"
-    puts "2. Choose text FILTER (CURRENTLY #{@filter[0]})"
-    puts "3. Get new text from SOURCE."
+    puts "1. Choose text SOURCE (CURRENTLY #{@manager.source[0]})"
+    puts "2. Choose text FILTER (CURRENTLY #{@manager.filter[0]})"
+    puts "3. Get new text from SOURCE"
     puts "4. Send current text to FILTER"
     puts "5. Quit\n"
     puts "\n"

@@ -1,6 +1,6 @@
 class API_Filter::Manager
-  attr_accessor :name, :link, :current_text
-  @@sources = [["Joke a Day", "joke url"], ["Famous Quotes", "Famous Quotes URL"]]
+  attr_accessor :source, :filter, :current_text
+  @@sources = [["Joke a Day", "https://official-joke-api.appspot.com/random_joke", "JOKE"], ["Famous Quotes", "Famous Quotes URL", "QUOTE"]]
   @@filters = [["Pirate Filter", "pirate filter url"], ["Meow Filter", "meow filter url"]]
   @@default_text = "It was the best of times, it was the worst of times"
   @@all = []
@@ -9,6 +9,7 @@ class API_Filter::Manager
     @current_text = current_text
     @source = source
     @filter = filter
+    @text_history = []
     @text_history << @text
     save
   end
@@ -37,15 +38,30 @@ class API_Filter::Manager
     @@sources
   end
 
-  def request(counter)
-    #Run Source API
-    #counter.times {"API Source Text"}
-    "API Source text"
+
+  def get_new_text
+    #fetch fresh text from the current source
+    new_data = HTTParty.get(@source[1])
+    process_data(new_data, @source[2])
   end
 
-  def translate(text)
+  def process_data(data, type)
+    case type
+    when "JOKE"
+      new_text = "#{data["setup"]} \n #{data["punchline"]}"
+    when "QUOTE"
+      binding.pry
+    else
+      new_text = data
+    end
+    new_text
+  end
+
+
+
+  def send_current_text
     #run translate API
-    text.upcase
+    @current_text = @current_text.upcase
   end
 
 end
