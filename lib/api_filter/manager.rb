@@ -46,14 +46,18 @@ class API_Filter::Manager
   end
 
   def process_data(data, type)
+  #processes data according to API type.
+  #This should probably be refactored later.
     case type
     when "JOKE"
-      new_text = "#{data["setup"]} \n #{data["punchline"]}"
+      new_text = "#{data['setup']} \n#{data['punchline']}"
     when "QUOTE"
       binding.pry
     else
       new_text = data
     end
+    @current_text = new_text
+    @text_history << @current_text
     new_text
   end
 
@@ -63,5 +67,10 @@ class API_Filter::Manager
     #run translate API
     @current_text = @current_text.upcase
   end
+
+  def text_history
+    @text_history
+  end
+
 
 end

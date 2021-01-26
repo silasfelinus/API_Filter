@@ -75,7 +75,7 @@ class API_Filter::CLI
     system('clear')
     puts "[Source] = '#{@manager.source[0]}'\n\n"
     new_text = @manager.get_new_text
-    puts "[Text Received] = '#{new_text}'\n\n"
+    puts "[Text Received]: \n\n'#{new_text}'\n\n"
     pause_for_effect
   end
 
