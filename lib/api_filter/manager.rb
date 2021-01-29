@@ -5,9 +5,10 @@ class API_Filter::Manager
                ["Forismatic.com (Quotes)", "https://api.forismatic.com/api/1.0/?method=getQuote&lang=en&format=json", "QUOTE"],
                ["Custom Text", nil, "CUSTOM"]
               ]
-  @@filters = [["Braile Translator", 'https://fastbraille.com/api/{#{@current_text}}', "BRAILLE"], 
-               ["Meow Filter", "meow filter url", "MEOW"],
-               ["Last Filter", "last_url", "FINAL"]
+  @@filters = [["Braille Translator", 'https://fastbraille.com/api/', "BRAILLE"], 
+               ["Klingon Translator", "https://api.funtranslations.com/translate/klingon.json?text=", "TRANSLATIONS"],
+               ["Russian Accent", "https://api.funtranslations.com/translate/russian-accent.json?text=", "TRANSLATIONS"],
+               ["Pirate Translator", "https://api.funtranslations.com/translate/pirate.json?text=", "TRANSLATIONS"]
               ]
   @@default_text = "It was the best of times, it was the worst of times"
   @@all = []
@@ -44,6 +45,7 @@ class API_Filter::Manager
     process_data(new_data, @source[2])
   end
 
+
   def process_data(data, type)
   #processes data according to API type.
   #This should be refactored so any customization requirements 
@@ -68,16 +70,15 @@ class API_Filter::Manager
 
   def send_current_text
     #run translate API
+    converted_text = @current_text.gsub(" ", "%20").to_s
+    new_url = filter[1] + converted_text
+    new_data = HTTParty.get(new_url)
+
     case @filter[2]
     when "BRAILLE"
-      #This currently requires custom url generation,because
-      #I didn't want to fiddle with getting the string to translate
-      #maybe I should learn how to do it and make a blog post about it.
-      converted_text = @current_text.gsub(" ", "%20")
-      new_url = 'https://fastbraille.com/api/' + converted_text.to_s
-      new_data = HTTParty.get(new_url)
       new_text = "#{new_data['braille']}"
-      binding.pry
+    when "TRANSLATIONS"
+      new_text = "#{new_data['contents']['translated']}"
     else
       new_text = "Something went wrong. I don't have that filter configured properly"
     end
