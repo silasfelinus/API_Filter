@@ -56,7 +56,7 @@ class API_Filter::CLI
     system('clear')
     puts "AVAILABLE APIS:\n"
     API_Filter::Manager.sources.each {|source| puts "#{source[0]} \n"}
-    @source = API_Filter::Manager.sources[get_integer(1, API_Filter::Manager.sources.length()) - 1]
+    @manager.source = API_Filter::Manager.sources[get_integer(1, API_Filter::Manager.sources.length()) - 1]
     puts "Your current source is #{@manager.source[0]}"
     pause_for_effect
   end
@@ -65,7 +65,7 @@ class API_Filter::CLI
     system('clear')
     puts "AVAILABLE FILTERS:\n"
     API_Filter::Manager.filters.each {|filter| puts "#{filter[0]}"}
-    @filter = API_Filter::Manager.filters[get_integer(1, API_Filter::Manager.filters.length()) - 1]
+    @manager.filter = API_Filter::Manager.filters[get_integer(1, API_Filter::Manager.filters.length()) - 1]
     puts "Your current filter is #{@manager.filter[0]}"
     pause_for_effect
   end

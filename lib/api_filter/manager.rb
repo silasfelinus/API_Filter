@@ -1,7 +1,14 @@
 class API_Filter::Manager
   attr_accessor :source, :filter, :current_text
-  @@sources = [["Joke a Day", "https://official-joke-api.appspot.com/random_joke", "JOKE"], ["Famous Quotes", "Famous Quotes URL", "QUOTE"]]
-  @@filters = [["Pirate Filter", "pirate filter url"], ["Meow Filter", "meow filter url"]]
+  @@sources = [["Official Joke API", "https://official-joke-api.appspot.com/random_joke", "JOKE"], 
+               ["Chuck Norris Jokes", "https://api.chucknorris.io/jokes/random", "CHUCK"], 
+               ["Forismatic.com (Quotes)", "https://api.forismatic.com/api/1.0/?method=getQuote&lang=en&format=json", "QUOTE"],
+               ["Custom Text", nil, "CUSTOM"]
+              ]
+  @@filters = [["Braile Translator", 'https://fastbraille.com/api/{#{@current_text}}', "BRAILLE"], 
+               ["Meow Filter", "meow filter url", "MEOW"],
+               ["Last Filter", "last_url", "FINAL"]
+              ]
   @@default_text = "It was the best of times, it was the worst of times"
   @@all = []
   
@@ -16,14 +23,6 @@ class API_Filter::Manager
 
   def self.all
     @@all
-  end
-
-  def self.default_source
-    @@default_source
-  end
-
-  def self.default_filter
-    @@default_filter
   end
 
   def save
@@ -47,26 +46,51 @@ class API_Filter::Manager
 
   def process_data(data, type)
   #processes data according to API type.
-  #This should probably be refactored later.
+  #This should be refactored so any customization requirements 
+  #are handled when the apis are declared
     case type
     when "JOKE"
       new_text = "#{data['setup']} \n#{data['punchline']}"
+    when "CHUCK"
+      new_text = "#{data['value']}"
     when "QUOTE"
-      binding.pry
+      new_text = "#{data['quoteText']} \n-#{data['quoteAuthor']}"
+    when "CUSTOM"
+      puts "Please input your custom text:"
+      new_text = gets.chomp
     else
       new_text = data
     end
-    @current_text = new_text
-    @text_history << @current_text
-    new_text
+    update_text(new_text)
   end
 
 
 
   def send_current_text
     #run translate API
-    @current_text = @current_text.upcase
+    case @filter[2]
+    when "BRAILLE"
+      #This currently requires custom url generation,because
+      #I didn't want to fiddle with getting the string to translate
+      #maybe I should learn how to do it and make a blog post about it.
+      converted_text = @current_text.gsub(" ", "%20")
+      new_url = 'https://fastbraille.com/api/' + converted_text.to_s
+      new_data = HTTParty.get(new_url)
+      new_text = "#{new_data['braille']}"
+      binding.pry
+    else
+      new_text = "Something went wrong. I don't have that filter configured properly"
+    end
+    update_text(new_text)
   end
+
+  def update_text(new_text)
+    @current_text = new_text
+    @text_history << @current_text
+    new_text
+  end
+
+
 
   def text_history
     @text_history
