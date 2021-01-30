@@ -16,9 +16,11 @@ class Matchmaker::CLI
     system('clear')
     puts "Hello! I'm Matchmaker!"
     puts "I love helping two or more APIs make a connection"
-    puts "(I'm still learning, so please be kind)."
-    puts "Feedback can be sent to my friend"
-    puts "Silas Knight at silasfelinus@gmail.com\n"
+    puts "Right now my specialty is text, but I also support braille"
+    puts "and I'm really interested in anything I can do to"
+    puts "help the digital and physical worlds talk to one another."
+    puts "Feedback can be sent to my friend Silas Knight "
+    puts "at silasfelinus@gmail.com\n"
     puts "\n"
   end
 
@@ -50,7 +52,7 @@ class Matchmaker::CLI
   def select_source
     system('clear')
     puts "AVAILABLE APIS:\n"
-    Matchmaker::Matchmaker.sources.each {|source| puts "#{source[0]} \n"}
+    Matchmaker::Matchmaker.sources.each_with_index {|source, index| puts "#{index+1} - #{source[0]} \n"}
     matchmaker.source = Matchmaker::Matchmaker.sources[get_integer(1, Matchmaker::Matchmaker.sources.length()) - 1]
     puts "Your current source is #{@matchmaker.source[0]}"
     pause_for_effect
@@ -59,7 +61,7 @@ class Matchmaker::CLI
   def select_filter
     system('clear')
     puts "AVAILABLE FILTERS:\n"
-    Matchmaker::Matchmaker.filters.each {|filter| puts "#{filter[0]}"}
+    Matchmaker::Matchmaker.filters.each_with_index {|filter, index| puts "#{index + 1} - #{filter[0]}"}
     @matchmaker.filter = Matchmaker::Matchmaker.filters[get_integer(1, Matchmaker::Matchmaker.filters.length()) - 1]
     puts "Your current filter is #{@matchmaker.filter[0]}"
     pause_for_effect
@@ -109,9 +111,9 @@ def call
     when 2
       select_filter
     when 3
-      get_new_text
+      fetch_me_a_text
     when 4
-      send_current_text
+      make_me_a_match
     when 5
     we_are_done = true
     end

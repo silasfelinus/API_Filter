@@ -1,13 +1,16 @@
 # Matchmaker
 
-Filters text-based API responses (jokes, chatbots, quotes, etc) through a selection of translation and dialect filters
+Hi, I'm Matchmaker!
+
+My job is to facilitate connections between APIs, making it child's play to pass data through multiple API filters.
+
+
 
 ## Installation
 
 Add this line to your application's Gemfile:
 
-```ruby
-gem 'matchmaker'
+```ruby gem 'matchmaker'
 ```
 
 And then execute:
@@ -22,7 +25,7 @@ Or install it yourself as:
 
 TODO: Write usage instructions here
 
-Ubuntu users: If you want more options for Braille fonts, you can install Microsoft TrueType Fonts: https://itsfoss.com/install-microsoft-fonts-ubuntu/
+
 
 ## Development
 
