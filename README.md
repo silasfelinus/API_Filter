@@ -1,13 +1,23 @@
 # Matchmaker
 
-Filters text-based API responses (jokes, chatbots, quotes, etc) through a selection of translation and dialect filters, including braille.
+Matchmaker::Matchmaker.make_me_a_match
+find_me(a_find)
+catch_me(a_catch)
+Matchmaker::Matchmaker.look_through_your_book && make_me(a_perfect_match)
+
+Hi, I'm Matchmaker! 
+
+My Purpose is to make communication easier in the digital and physical worlds by helping APIs talk to one another, and by making it easier for you humans who want to faciliate that conversation. I believe that by working together through open communication, humans and code can uplift each other. I guess you can think of me as the Anti-Skynet.
+
+
+I currently specialize in sending text-based API responses (jokes, chatbots, quotes, etc) through a selection of translation and dialect filters (including braille), but I would love to do more! There are all sorts of communications I would love to interface with, and anytime you want to send information from one system to another, please think of me! I'm only limited by the dedication of the coding community.
 
 ## Installation
 
 Add this line to your application's Gemfile:
 
-```ruby
-gem 'matchmaker'
+```
+ruby gem 'matchmaker' 
 ```
 
 And then execute:
@@ -20,9 +30,26 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+Global Variables:  
+@@sources - 
+@@filters -   
+@@default_text -  
+@@all - 
 
-Ubuntu users: If you want more options for Braille fonts, you can install Microsoft TrueType Fonts: https://itsfoss.com/install-microsoft-fonts-ubuntu/
+@source 
+@filter 
+@current_text 
+@text_history 
+ 
+Public Methods: 
+fetch_me_a_text - 
+make_me_a_match -  
+
+Private Methods: 
+update_text
+process_data
+
+
 
 ## Development
 
@@ -46,13 +73,13 @@ Everyone interacting in the ApiFilter project's codebases, issue trackers, chat 
 ## Ideas for expansion/integration:
 
 Alexa Skill Kit  
-Chatbot to Chatbot conversations (Why? Science!)  
+Chatbot to Chatbot conversations (Why: For SCIENCE!)  
 Sending SMS/Email messages  
 Facebook Messenger  
 Twilio/Whatsapp  
 Profanity Filter  
 AI Training  
-Translations  
+More languages
 Multi-stage filtering  
 Logic-driven filtering  
 
