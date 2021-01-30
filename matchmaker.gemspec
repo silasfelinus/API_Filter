@@ -1,23 +1,23 @@
 # frozen_string_literal: true
 
-require_relative "lib/api_filter/version"
+require_relative "lib/matchmaker/version"
 
 Gem::Specification.new do |spec|
-  spec.name          = "api_filter"
-  spec.version       = API_Filter::VERSION
+  spec.name          = "Matchmaker"
+  spec.version       = Matchmaker::VERSION
   spec.authors       = ["silasfelinus"]
   spec.email         = ["silasfelinus@gmail.com"] 
 
   spec.summary       = "Filters text-based API responses (jokes, chatbots, quotes, etc) through a selection of translation and dialect"
-  spec.homepage      = "https://github.com/silasfelinus/api_filter"
+  spec.homepage      = "https://github.com/silasfelinus/matchmaker"
   spec.license       = "MIT"
   spec.required_ruby_version = Gem::Requirement.new(">= 2.3.0")
 
   spec.metadata["allowed_push_host"] = "http://rubygems.org"
 
   spec.metadata["homepage_uri"] = spec.homepage
-  spec.metadata["source_code_uri"] = "https://github.com/silasfelinus/api_filter"
-  spec.metadata["changelog_uri"] = "https://github.com/silasfelinus/api_filter"
+  spec.metadata["source_code_uri"] = "https://github.com/silasfelinus/matchmaker"
+  spec.metadata["changelog_uri"] = "https://github.com/silasfelinus/matchmaker"
 
 
   # Specify which files should be added to the gem when it is released.

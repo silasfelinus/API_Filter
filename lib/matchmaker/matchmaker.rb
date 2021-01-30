@@ -1,4 +1,4 @@
-class API_Filter::Manager
+class Matchmaker::Matchmaker
   attr_accessor :source, :filter, :current_text
   @@sources = [["Official Joke API", "https://official-joke-api.appspot.com/random_joke", "JOKE"], 
                ["Chuck Norris Jokes", "https://api.chucknorris.io/jokes/random", "CHUCK"], 
@@ -67,7 +67,6 @@ class API_Filter::Manager
   end
 
 
-
   def send_current_text
     #run translate API
     converted_text = @current_text.gsub(" ", "%20").to_s
@@ -90,7 +89,6 @@ class API_Filter::Manager
     @text_history << @current_text
     new_text
   end
-
 
 
   def text_history

@@ -1,4 +1,4 @@
-# ApiFilter
+# Mtchmaker
 
 Filters text-based API responses (jokes, chatbots, quotes, etc) through a selection of translation and dialect filters
 
@@ -7,7 +7,7 @@ Filters text-based API responses (jokes, chatbots, quotes, etc) through a select
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'api_filter'
+gem 'matchmaker'
 ```
 
 And then execute:
@@ -16,7 +16,7 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install api_filter
+    $ gem install matchmaker
 
 ## Usage
 
