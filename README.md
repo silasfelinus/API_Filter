@@ -45,16 +45,16 @@ Everyone interacting in the ApiFilter project's codebases, issue trackers, chat 
 
 ## Ideas for expansion/integration:
 
-Alexa Skill Kit
-Chatbot to Chatbot conversations (Why? Science!)
-Sending SMS/Email messages
-Facebook Messenger
-Twilio/Whatsapp
-Profanity Filter
-AI Training
-translations
-Multi-stage filtering
-logic-driven filtering
+Alexa Skill Kit  
+Chatbot to Chatbot conversations (Why? Science!)  
+Sending SMS/Email messages  
+Facebook Messenger  
+Twilio/Whatsapp  
+Profanity Filter  
+AI Training  
+translations  
+Multi-stage filtering  
+logic-driven filtering  
 
 
 
