@@ -3,20 +3,20 @@
 module Matchmaker
   class Matchmaker
     attr_accessor :source, :filter, :current_text
-    @@sources = [["Official Joke API", 
+    @@sources = [["Official Joke API",
                   "https://official-joke-api.appspot.com/random_joke", "JOKE"],
-                 ["Chuck Norris Jokes", 
+                 ["Chuck Norris Jokes",
                   "https://api.chucknorris.io/jokes/random", "CHUCK"],
-                 ["Forismatic.com (Quotes)", 
+                 ["Forismatic.com (Quotes)",
                   "https://api.forismatic.com/api/1.0/?method=getQuote&lang=en&format=json", "QUOTE"],
                  ["Custom Text", nil, "CUSTOM"]]
-    @@filters = [["Braille Translator", 
+    @@filters = [["Braille Translator",
                   "https://fastbraille.com/api/", "BRAILLE"],
-                 ["Klingon Translator", 
+                 ["Klingon Translator",
                   "https://api.funtranslations.com/translate/klingon.json?text=", "TRANSLATIONS"],
-                 ["Russian Accent", 
+                 ["Russian Accent",
                   "https://api.funtranslations.com/translate/russian-accent.json?text=", "TRANSLATIONS"],
-                 ["Pirate Translator", 
+                 ["Pirate Translator",
                   "https://api.funtranslations.com/translate/pirate.json?text=", "TRANSLATIONS"]]
     @@all = []
 
