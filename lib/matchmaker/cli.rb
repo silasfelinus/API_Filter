@@ -51,7 +51,7 @@ class Matchmaker::CLI
     system('clear')
     puts "AVAILABLE APIS:\n"
     Matchmaker::Matchmaker.sources.each {|source| puts "#{source[0]} \n"}
-    matchmaker.source = Matchmaker::Matchmaker.sources[get_integer(1, API_Filter::matchmaker.sources.length()) - 1]
+    matchmaker.source = Matchmaker::Matchmaker.sources[get_integer(1, Matchmaker::Matchmaker.sources.length()) - 1]
     puts "Your current source is #{@matchmaker.source[0]}"
     pause_for_effect
   end
@@ -60,7 +60,7 @@ class Matchmaker::CLI
     system('clear')
     puts "AVAILABLE FILTERS:\n"
     Matchmaker::Matchmaker.filters.each {|filter| puts "#{filter[0]}"}
-    @matchmaker.filter = Matchmaker::Matchmaker.filters[get_integer(1, API_Filter::matchmaker.filters.length()) - 1]
+    @matchmaker.filter = Matchmaker::Matchmaker.filters[get_integer(1, Matchmaker::Matchmaker.filters.length()) - 1]
     puts "Your current filter is #{@matchmaker.filter[0]}"
     pause_for_effect
   end

@@ -3,4 +3,4 @@
 require_relative '../lib/environment'
 
 
-API_Filter::CLI.new.call
+Matchmaker::CLI.new.call

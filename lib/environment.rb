@@ -1,6 +1,6 @@
-require_relative "./api_filter/version"
-require_relative "./api_filter/cli"
-require_relative "./api_filter/matchmaker"
+require_relative "./matchmaker/version"
+require_relative "./matchmaker/cli"
+require_relative "./matchmaker/matchmaker"
 require 'pry'
 require "httparty"
 
