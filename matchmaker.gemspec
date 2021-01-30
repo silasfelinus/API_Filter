@@ -35,7 +35,6 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency "rspec", "~> 3.0"
 
-  spec.add_dependency "rubocop", "~> 0.80"
 
   spec.add_dependency "pry", "~> 0.13.1"
 
