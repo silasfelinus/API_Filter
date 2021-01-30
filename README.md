@@ -1,4 +1,4 @@
-# Mtchmaker
+# Matchmaker
 
 Filters text-based API responses (jokes, chatbots, quotes, etc) through a selection of translation and dialect filters
 
