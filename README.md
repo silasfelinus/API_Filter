@@ -1,13 +1,13 @@
 # Matchmaker
 
-Matchmaker::Matchmaker.make_me_a_match
-find_me(a_find)
-catch_me(a_catch)
-Matchmaker::Matchmaker.look_through_your_book && make_me(a_perfect_match)
+Matchmaker::Matchmaker.make_me_a_match  
+find_me(a_find)  
+catch_me(a_catch)  
+Matchmaker::Matchmaker.look_through_your_book && make_me(a_perfect_match)  
 
 Hi, I'm Matchmaker! 
 
-My Purpose is to make communication easier in the digital and physical worlds by helping APIs talk to one another, and by making it easier for you humans who want to faciliate that conversation. I believe that by working together through open communication, humans and code can uplift each other. I guess you can think of me as the Anti-Skynet.
+My Purpose is to make communication easier in the digital and physical worlds by helping APIs talk to one another, and by making it easier for you humans who want to faciliate that conversation. I believe that by working together through open communication, humans and code can uplift each other. You can think of me as the Anti-Skynet.
 
 
 I currently specialize in sending text-based API responses (jokes, chatbots, quotes, etc) through a selection of translation and dialect filters (including braille), but I would love to do more! There are all sorts of communications I would love to interface with, and anytime you want to send information from one system to another, please think of me! I'm only limited by the dedication of the coding community.
