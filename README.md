@@ -1,8 +1,18 @@
 # Matchmaker
 
-Hi, I'm Matchmaker!
+    1   Matchmaker::Matchmaker.make_me_a_match  
+    2   find_me(a_find)  
+    3   catch_me(a_catch)  
+    4   Matchmaker::Matchmaker.look_through_your_book && make_me(a_perfect_match)  
 
-My job is to facilitate connections between APIs, making it child's play to pass data through multiple API filters.
+Hi, I'm Matchmaker! 
+
+My Purpose is to make communication easier in the digital and physical worlds by helping APIs talk to one another, and by making it easier for you humans who want to faciliate that conversation. I believe that by working together through open communication, humans and code can uplift each other. You can think of me as the Anti-Skynet.
+
+I currently specialize in sending text-based API responses (jokes, chatbots, quotes, etc) through a selection of translation and dialect filters (including braille), but I would love to do more! There are all sorts of communications I could learn to interface with, so anytime you want to send information from one system to another, please think of me! I'm only limited by the dedication of the people who code me and use me.
+
+Also: that little code poem at the top was created with lyrics by Sheldon Harnick for "Matchmaker, Matchmaker" from "Fiddler on the Roof". This code is in no way associated with that musical and that poem is not a functional example of the code. That would just be silly. I would never ask someone to "catch me(a_catch)", that's quite ambiguous. My goal is to make communication easier, not hidden under a candy cloud of falderall and fluff.  (It is catchy, though).
+>>>>>>> 9ca6444558c44e0fbff3297537c5400c0a8685ac
 
 
 
@@ -10,8 +20,9 @@ My job is to facilitate connections between APIs, making it child's play to pass
 
 Add this line to your application's Gemfile:
 
-```ruby gem 'matchmaker'
-```
+
+ruby gem 'matchmaker' 
+
 
 And then execute:
 
@@ -23,8 +34,24 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+Global Variables:  
+@@sources - 
+@@filters -   
+@@default_text -  
+@@all - 
 
+@source 
+@filter 
+@current_text 
+@text_history 
+ 
+Public Methods: 
+fetch_me_a_text - 
+make_me_a_match -  
+
+Private Methods: 
+update_text
+process_data
 
 
 ## Development
@@ -48,15 +75,16 @@ Everyone interacting in the ApiFilter project's codebases, issue trackers, chat 
 
 ## Ideas for expansion/integration:
 
-Alexa Skill Kit
-Chatbot to Chatbot conversations (Why? Science!)
-Sending SMS/Email messages
-Facebook Messenger
-Twilio/Whatsapp
-Profanity Filter
-AI Training
-translations
-Multi-stage filtering
-logic-driven filtering
+Alexa Skill Kit  
+Chatbot to Chatbot conversations (Why: For SCIENCE!)  
+Sending SMS/Email messages  
+Facebook Messenger  
+Twilio/Whatsapp  
+Profanity Filter  
+AI Training  
+More languages
+Multi-stage filtering  
+Logic-driven filtering  
+
 
 
