@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe ApiFilter do
+RSpec.describe Matchmaker do
   it "has a version number" do
     expect(ApiFilter::VERSION).not_to be nil
   end
