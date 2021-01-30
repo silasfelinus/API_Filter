@@ -52,9 +52,9 @@ Facebook Messenger
 Twilio/Whatsapp  
 Profanity Filter  
 AI Training  
-translations  
+Translations  
 Multi-stage filtering  
-logic-driven filtering  
+Logic-driven filtering  
 
 
 
