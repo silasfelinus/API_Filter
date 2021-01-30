@@ -2,7 +2,7 @@
 
 RSpec.describe Matchmaker do
   it "has a version number" do
-    expect(ApiFilter::VERSION).not_to be nil
+    expect(Matchmaker::VERSION).not_to be nil
   end
 
   it "does something useful" do
