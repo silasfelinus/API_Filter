@@ -16,8 +16,8 @@ class Matchmaker::Matchmaker
   def initialize (current_text = @@default_text, source = @@sources[0], filter = @@filters[0])
     @source = source
     @filter = filter
-    @current_text = get_me_a_text
     @text_history = []
+    @current_text = fetch_me_a_text
     @text_history << @current_text
     save
   end

@@ -34,7 +34,6 @@ class Matchmaker::CLI
     user_input.to_i
   end
 
-  
   def display_text
     puts "**************************************\n"
     puts "CURRENT TEXT:\n\n"
@@ -71,53 +70,51 @@ class Matchmaker::CLI
     #Returns fresh text from Source
     system('clear')
     puts "[Source] = '#{@matchmaker.source[0]}'\n\n"
-    new_text = @matchmaker.get_new_text
+    new_text = @matchmaker.fetch_me_a_text
     puts "[Text Received]: \n\n'#{new_text}'\n\n"
     pause_for_effect
   end
-
 
   def send_current_text
     #Sends current text to Filter &
     #Returns filter's reply
     system('clear')
     puts "[Text Sent] = '#{@matchmaker.current_text}'\n\n"
-    new_text = @matchmaker.send_current_text
+    new_text = @matchmaker.make_me_a_match
     puts "[Text Received] = '#{new_text}'\n\n"
     pause_for_effect
   end
 
+  def call
+    #Initialize variables and handles menu loop
+    reset_variables
+    welcome_user
+    valid_answers = ["1", "2", "3", "4", "5"]
+    we_are_done = false
 
-def call
-  #Initialize variables and handles menu loop
-  reset_variables
-  welcome_user
-
-  valid_answers = ["1", "2", "3", "4", "5"]
-
-  we_are_done = false
-  while we_are_done == false
-    puts "1. Choose text SOURCE (CURRENTLY #{@matchmaker.source[0]})"
-    puts "2. Choose text FILTER (CURRENTLY #{@matchmaker.filter[0]})"
-    puts "3. Get new text from SOURCE"
-    puts "4. Send current text to FILTER"
-    puts "5. Quit\n"
-    puts "\n"
-    display_text
-    selection = get_integer(1, valid_answers.length())
-    case selection
-    when 1
-      select_source
-    when 2
-      select_filter
-    when 3
-      fetch_me_a_text
-    when 4
-      make_me_a_match
-    when 5
-    we_are_done = true
+    while we_are_done == false
+      puts "1. Choose text SOURCE (CURRENTLY #{@matchmaker.source[0]})"
+      puts "2. Choose text FILTER (CURRENTLY #{@matchmaker.filter[0]})"
+      puts "3. Get new text from SOURCE"
+      puts "4. Send current text to FILTER"
+      puts "5. Quit\n"
+      puts "\n"
+      display_text
+      selection = get_integer(1, valid_answers.length())
+      case selection
+      when 1
+        select_source
+      when 2
+        select_filter
+      when 3
+        fetch_me_a_text
+      when 4
+        make_me_a_match
+      when 5
+      we_are_done = true
+      end
     end
+
   end
-end
 
 end
