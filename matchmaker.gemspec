@@ -11,7 +11,7 @@ Gem::Specification.new do |spec|
   spec.summary       = "Filters text-based API responses (jokes, chatbots, quotes, etc) through a selection of translation and dialect"
   spec.homepage      = "https://github.com/silasfelinus/matchmaker"
   spec.license       = "MIT"
-  spec.required_ruby_version = Gem::Requirement.new(">= 2.3.0")
+  spec.required_ruby_version = Gem::Requirement.new(">= 2.4.0")
 
   spec.metadata["allowed_push_host"] = "http://rubygems.org"
 
