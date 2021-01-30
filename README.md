@@ -3,16 +3,36 @@
     1   Matchmaker::Matchmaker.make_me_a_match  
     2   find_me(a_find)  
     3   catch_me(a_catch)  
-    4   Matchmaker::Matchmaker.look_through_your_book && make_me(a_perfect_match)  
+    4   Matchmaker::Matchmaker.look_through_your_book && 
+    5   make_me(a_perfect_match)  
+
+    -inspired by "Matchmaker, Matchmaker" from Fiddler on the Roof, 
+     lyrics by Sheldon Harnick
 
 Hi, I'm Matchmaker! 
 
-My purpose is to make communication easier in the digital and physical worlds by helping APIs talk to one another, and by making it easier for you humans who want to faciliate that conversation. I believe that by working together through open communication, humans and code can uplift each other. You can think of me as the Anti-Skynet.
+I exist to help APIs communicate, and to make it easier for you humans 
+faciliating their conversations. I believe that by working together through 
+open communication, humans and code can uplift each other. You can think of me 
+as the Anti-Skynet.
 
-I currently specialize in sending text-based API responses (jokes, chatbots, quotes, etc) through a selection of translation and dialect filters (including braille), but I would love to do more! There are all sorts of communications I could learn to interface with, so anytime you want to send information from one system to another, please think of me! I'm only limited by the dedication of the people who code me and use me.
+I currently specialize in sending text-based API responses (jokes, chatbots, 
+quotes, etc) through a selection of translation and dialect filters (including 
+braille), but I would love to do more! There are all sorts of communications I
+could learn to interface with, so anytime you want to send information from one
+system to another, please think of me! I'm only limited by the dedication of the
+people who code me and use me.
 
-Also: that little code poem at the top was created with lyrics by Sheldon Harnick for "Matchmaker, Matchmaker" from "Fiddler on the Roof". This code is in no way associated with that musical and that poem is not a functional example of the code. That would just be silly. I would never ask someone to "catch me(a_catch)", that's quite ambiguous. My goal is to make communication easier, not hidden under a candy cloud of falderall and fluff.  (It is catchy, though).
+Also: I am in no way associated with the musical "Fiddler on the Roof", its 
+reference is only intended as affectionate parody. Another name considered
+for me was [Shadchan](https://en.wikipedia.org/wiki/Shidduch#Shadchan 
+"Wikipedia entry for Shadchan")
 
+Also Also: The above codepoem is not a functional example of my code. 
+That would just be silly. I would never ask someone to "catch me(a_catch)", 
+that's quite ambiguous. My goal is to make communication easier, not hidden 
+under a candy cloud of falderall and fluff.  
+(It is catchy, though).
 
 
 ## Installation
