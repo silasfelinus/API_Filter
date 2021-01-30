@@ -7,20 +7,24 @@ module Matchmaker
                   "https://official-joke-api.appspot.com/random_joke", "JOKE"],
                  ["Chuck Norris Jokes",
                   "https://api.chucknorris.io/jokes/random", "CHUCK"],
-                 ["Forismatic.com (Quotes)",
-                  "https://api.forismatic.com/api/1.0/?method=getQuote&lang=en&format=json", "QUOTE"],
+                 ["Forismatic.com (Quotes)", "https://api.forismatic.com/api/1.0
+                  /?method=getQuote&lang=en&format=json", "QUOTE"],
                  ["Custom Text", nil, "CUSTOM"]]
     @@filters = [["Braille Translator",
                   "https://fastbraille.com/api/", "BRAILLE"],
                  ["Klingon Translator",
-                  "https://api.funtranslations.com/translate/klingon.json?text=", "TRANSLATIONS"],
+                  "https://api.funtranslations.com/translate/klingon.json?text="
+                  , "TRANSLATIONS"],
                  ["Russian Accent",
-                  "https://api.funtranslations.com/translate/russian-accent.json?text=", "TRANSLATIONS"],
+                  "https://api.funtranslations.com/translate/russian-accent.json
+                  ?text=", "TRANSLATIONS"],
                  ["Pirate Translator",
-                  "https://api.funtranslations.com/translate/pirate.json?text=", "TRANSLATIONS"]]
+                  "https://api.funtranslations.com/translate/pirate.json?text=",
+                   "TRANSLATIONS"]]
     @@all = []
 
-    def initialize(_current_text = nil, source = @@sources[0], filter = @@filters[0])
+    def initialize(_current_text = nil, source = @@sources[0],
+       filter = @@filters[0])
       @source = source
       @filter = filter
       @text_history = []
@@ -65,7 +69,8 @@ module Matchmaker
                  when "TRANSLATIONS"
                    (new_data["contents"]["translated"]).to_s
                  else
-                   "Something went wrong. I don't have that filter configured properly"
+                   "Something went wrong. 
+                   I don't have that filter configured properly"
                  end
       update_text(new_text)
     end
