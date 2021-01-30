@@ -12,7 +12,6 @@ My Purpose is to make communication easier in the digital and physical worlds by
 I currently specialize in sending text-based API responses (jokes, chatbots, quotes, etc) through a selection of translation and dialect filters (including braille), but I would love to do more! There are all sorts of communications I could learn to interface with, so anytime you want to send information from one system to another, please think of me! I'm only limited by the dedication of the people who code me and use me.
 
 Also: that little code poem at the top was created with lyrics by Sheldon Harnick for "Matchmaker, Matchmaker" from "Fiddler on the Roof". This code is in no way associated with that musical and that poem is not a functional example of the code. That would just be silly. I would never ask someone to "catch me(a_catch)", that's quite ambiguous. My goal is to make communication easier, not hidden under a candy cloud of falderall and fluff.  (It is catchy, though).
->>>>>>> 9ca6444558c44e0fbff3297537c5400c0a8685ac
 
 
 
