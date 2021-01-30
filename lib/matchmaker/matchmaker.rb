@@ -79,8 +79,9 @@ module Matchmaker
 
     def process_data(data, type)
       # processes data according to API type.
-      # This should probably be refactored so any customization requirements
-      # are handled when the apis are declared
+      # This should probably be refactored so 
+      # any customization requirements are handled 
+      # when the apis are declared
       case type
       when "JOKE"
         new_text = "#{data["setup"]} \n#{data["punchline"]}"

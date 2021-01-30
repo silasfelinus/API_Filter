@@ -28,8 +28,8 @@ module Matchmaker
     def get_integer(min, max)
       # asks user for input until receiving a valid integer
       user_input = nil
-      until user_input.to_i.to_s == user_input && user_input.to_i <= max && 
-        user_input.to_i >= min
+      until user_input.to_i.to_s == user_input && user_input.to_i <= max &&
+            user_input.to_i >= min
         puts "Please input an integer between #{min} and #{max}."
         user_input = gets.chomp
       end
@@ -53,8 +53,9 @@ module Matchmaker
     def select_source
       system("clear")
       puts "AVAILABLE APIS:\n"
-      Matchmaker::Matchmaker.sources.each_with_index { |source, index| 
-        puts "#{index + 1} - #{source[0]} \n" }
+      Matchmaker::Matchmaker.sources.each_with_index do |source, index|
+        puts "#{index + 1} - #{source[0]} \n"
+      end
       matchmaker.source = Matchmaker::Matchmaker.sources[
         get_integer(1, Matchmaker::Matchmaker.sources.length) - 1]
       puts "Your current source is #{@matchmaker.source[0]}"
@@ -64,8 +65,9 @@ module Matchmaker
     def select_filter
       system("clear")
       puts "AVAILABLE FILTERS:\n"
-      Matchmaker::Matchmaker.filters.each_with_index { |filter, index| 
-        puts "#{index + 1} - #{filter[0]}" }
+      Matchmaker::Matchmaker.filters.each_with_index do |filter, index|
+        puts "#{index + 1} - #{filter[0]}"
+      end
       @matchmaker.filter = Matchmaker::Matchmaker.filters[
         get_integer(1, Matchmaker::Matchmaker.filters.length) - 1]
       puts "Your current filter is #{@matchmaker.filter[0]}"
