@@ -6,8 +6,8 @@
     4   Matchmaker::Matchmaker.look_through_your_book && 
     5   make_me(a_perfect_match)  
 
-    -inspired by "Matchmaker, Matchmaker" from Fiddler on the Roof, 
-     lyrics by Sheldon Harnick
+        -inspired by "Matchmaker, Matchmaker" from Fiddler on the Roof, 
+      lyrics by Sheldon Harnick
 
 Hi, I'm Matchmaker! 
 
@@ -29,9 +29,9 @@ for me was [Shadchan](https://en.wikipedia.org/wiki/Shidduch#Shadchan
 "Wikipedia entry for Shadchan")
 
 Also Also: The above codepoem is not a functional example of my code. 
-That would just be silly. I would never ask someone to "catch me(a_catch)", 
-that's quite ambiguous. My goal is to make communication easier, not hidden 
-under a candy cloud of falderall and fluff.  
+That would just be silly. I can't see a good reason to expect someone 
+to "catch me(a_catch)",  that's exceedingly vague. My goal is to make 
+communication easier, not hidden under a candy cloud of falderall and fluff.  
 (It is catchy, though).
 
 

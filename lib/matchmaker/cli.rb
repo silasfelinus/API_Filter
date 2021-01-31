@@ -5,12 +5,7 @@ require_relative "./matchmaker"
 module Matchmaker
   class CLI
     # CLI interface for the Source/Filter transaction
-    attr_accessor :matchmaker, :results
-
-    def reset_variables
-      @matchmaker = Matchmaker::Matchmaker.new
-      @results = []
-    end
+    attr_accessor :matchmaker
 
     def welcome_user
       # Welcome the user and list menu options
@@ -53,11 +48,11 @@ module Matchmaker
     def select_source
       system("clear")
       puts "AVAILABLE APIS:\n"
-      Matchmaker::Matchmaker.sources.each_with_index do |source, index|
+      @matchmaker.sources.each_with_index do |source, index|
         puts "#{index + 1} - #{source[0]} \n"
       end
-      matchmaker.source = Matchmaker::Matchmaker.sources[
-        get_integer(1, Matchmaker::Matchmaker.sources.length) - 1]
+      @matchmaker.source = @matchmaker.sources[
+        get_integer(1, @matchmaker.sources.length) - 1]
       puts "Your current source is #{@matchmaker.source[0]}"
       pause_for_effect
     end
@@ -65,11 +60,11 @@ module Matchmaker
     def select_filter
       system("clear")
       puts "AVAILABLE FILTERS:\n"
-      Matchmaker::Matchmaker.filters.each_with_index do |filter, index|
+      @matchmaker.filters.each_with_index do |filter, index|
         puts "#{index + 1} - #{filter[0]}"
       end
-      @matchmaker.filter = Matchmaker::Matchmaker.filters[
-        get_integer(1, Matchmaker::Matchmaker.filters.length) - 1]
+      @matchmaker.filter = @matchmaker.filters[
+        get_integer(1, @matchmaker.filters.length) - 1]
       puts "Your current filter is #{@matchmaker.filter[0]}"
       pause_for_effect
     end
@@ -95,7 +90,7 @@ module Matchmaker
 
     def call
       # Initialize variables and handles menu loop
-      reset_variables
+      @matchmaker = Matchmaker.new
       welcome_user
       valid_answers = %w[1 2 3 4 5]
       we_are_done = false
@@ -115,9 +110,9 @@ module Matchmaker
         when 2
           select_filter
         when 3
-          fetch_me_a_text
+          get_new_text
         when 4
-          make_me_a_match
+          send_current_text
         when 5
           we_are_done = true
         end
