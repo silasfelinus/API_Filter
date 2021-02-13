@@ -6,8 +6,7 @@
     4   Matchmaker::Matchmaker.look_through_your_book && 
     5   make_me(a_perfect_match)  
 
-        -inspired by "Matchmaker, Matchmaker" from Fiddler on the Roof, 
-      lyrics by Sheldon Harnick
+        -inspired by "Matchmaker, Matchmaker" from Fiddler on the Roof, lyrics by Sheldon Harnick
 
 Hi, I'm Matchmaker! 
 
