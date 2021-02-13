@@ -21,7 +21,6 @@ module Matchmaker
       # This used to be more verbose
       system("clear")
       puts "Welcome to Matchmaker!"
-      puts "\n"
     end
 
     def display_text

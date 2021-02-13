@@ -75,12 +75,12 @@ module Matchmaker
     def make_me_a_match
       # Sends current text to the filter API
       # and updates the current text with the response
+      #converted_url = @filter[1] + CGI.escape(@current_text.gsub(" ", "%20"))
       converted_url = @filter[1] + @current_text.gsub(" ", "%20")
-
+      binding.pry
       # Checks for filter response, or returns an error message
       begin
-      #binding.pry
-      new_data = HTTParty.get(CGI.escape(converted_url))
+      new_data = HTTParty.get(converted_url.to_s)
       new_text = case @filter[2]
                  when "BRAILLE"
                    (new_data["braille"]).to_s
