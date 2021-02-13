@@ -42,6 +42,7 @@ module Matchmaker
       end
       @matchmaker.source = @matchmaker.sources[
         get_integer(1, @matchmaker.sources.length) - 1]
+      system("clear")
       puts "Your current source is #{@matchmaker.source[0]}"
     end
 
@@ -83,13 +84,14 @@ module Matchmaker
       valid_answers = %w[1 2 3 4 5]
       we_are_done = false
       while we_are_done == false
+        display_text
         puts "1. Choose text SOURCE (CURRENTLY #{@matchmaker.source[0]})"
         puts "2. Choose text FILTER (CURRENTLY #{@matchmaker.filter[0]})"
         puts "3. Get new text from SOURCE"
         puts "4. Send current text to FILTER"
         puts "5. Quit\n"
         puts "\n"
-        display_text
+
         selection = get_integer(1, valid_answers.length)
         system("clear")
         case selection

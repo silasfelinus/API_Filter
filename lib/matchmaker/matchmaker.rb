@@ -75,17 +75,30 @@ module Matchmaker
     def make_me_a_match
       # Sends current text to the filter API
       # and updates the current text with the response
-      converted_url = @filter[1] + CGI.escape(@current_text.gsub(" ", "%20"))
-      new_data = HTTParty.get(converted_url)
+      converted_url = @filter[1] + @current_text.gsub(" ", "%20")
+
+      # Checks for filter response, or returns an error message
+      begin
+      #binding.pry
+      new_data = HTTParty.get(CGI.escape(converted_url))
       new_text = case @filter[2]
                  when "BRAILLE"
                    (new_data["braille"]).to_s
                  when "TRANSLATIONS"
                    (new_data["contents"]["translated"]).to_s
+                # when NEWCODEGOESHERE
                  else
                    "Something went wrong. I don't have that filter configured properly"
                  end
       update_text(new_text)
+      rescue => error_message
+        puts "Something went wrong."
+        puts "If you are accessing a free API, they may be rate-limited"
+        puts "Maybe this message will help:"
+        puts error_message
+        puts "\n\n"
+      end
+
     end
 
     private
