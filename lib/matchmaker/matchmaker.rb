@@ -30,56 +30,53 @@ module Matchmaker
       @sources
     end
 
-    def add_filter(filter)
-      @filters << filter
-    end
-
     def add_source(source)
       @sources << source
     end
 
+    def add_filter(filter)
+      @filters << filter
+    end
+
 
     def fetch_me_a_text
-      # processes data according to API type.
-      # This should probably be refactored so 
-      # any customization requirements are handled 
-      # when the apis are declared
-      case  @source[2]
-      when "JOKE"
-        new_data = HTTParty.get(@source[1])
-        new_text = "#{new_data["setup"]} \n#{new_data["punchline"]}"
-      when "CHUCK"
-        new_data = HTTParty.get(@source[1])
-        new_text = (new_data["value"]).to_s
-      when "FACTOID"
-        new_data = HTTParty.get(@source[1])
-        new_text = (new_data["fact"]).to_s
-      when "QUOTE"
-        new_data = HTTParty.get(@source[1])
-        new_text = "#{new_data["quoteText"]} \n-#{new_data["quoteAuthor"]}"
-      when "POEM"
-        new_data = HTTParty.get(@source[1])
-        binding.pry
-        poem_data = new_data["contents"]["poems"]
-        title = poem_data[0]["poem"]["title"].to_s
-        poet = poem_data[0]["poem"]["author"].to_s
-        poem = poem_data[0]["poem"]["poem"].to_s
-        new_text = "#{title}\n#{poem}\n\n -#{poet}"
-      when "CUSTOM"
+      # g=Grabs new text from the source API
+      if @source[2] == "CUSTOM"
         puts "Please input your custom text:"
         new_text = gets.chomp
       else
-        new_text = new_data
-      end
+        new_data = HTTParty.get(@source[1])
+        if new_data["error"]
+          puts new_data["error"]["message"].text
+        else
+          case  @source[2]
+          when "JOKE"
+            new_text = "#{new_data["setup"]} \n#{new_data["punchline"]}"
+          when "CHUCK"
+            new_text = (new_data["value"]).to_s
+          when "FACTOID"
+            new_text = (new_data["fact"]).to_s
+          when "QUOTE"
+            new_text = "#{new_data["quoteText"]} \n-#{new_data["quoteAuthor"]}"
+          when "POEM"
+            poem_data = new_data["contents"]["poems"]
+            title = poem_data[0]["poem"]["title"].to_s
+            poet = poem_data[0]["poem"]["author"].to_s
+            poem = poem_data[0]["poem"]["poem"].to_s
+            new_text = "#{title}\n#{poem}\n\n -#{poet}"
+          else
+            new_text = new_data
+          end
+        end
       update_text(new_text)
+      end
     end
 
     def make_me_a_match
-      # match source to filter
-      # support for multiple filter matchups expected in future revision
-      converted_text = @current_text.gsub(" ", "%20").to_s
-      new_url = @filter[1] + converted_text
-      new_data = HTTParty.get(new_url)
+      # Sends current text to the filter API
+      # and updates the current text with the response
+      converted_url = @filter[1] + CGI.escape(@current_text.gsub(" ", "%20"))
+      new_data = HTTParty.get(converted_url)
       new_text = case @filter[2]
                  when "BRAILLE"
                    (new_data["braille"]).to_s
@@ -91,7 +88,9 @@ module Matchmaker
       update_text(new_text)
     end
 
+    private
     def update_text(new_text)
+      # Updates the current text
       @current_text = new_text
       @text_history << @current_text
       new_text
