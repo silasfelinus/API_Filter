@@ -54,11 +54,9 @@ Or install it yourself as:
 # Usage
 
 # Matchmaker::CLI
-VARIABLES
 ## @matchmaker
-      Stores the matchmaker abject that handles the api interactions.
+      Stores the matchmaker object that handles the api interactions.
 
-PUBLIC METHODS
 ## call
       Initiates the matchmaker and walks the user through their first match
       Then calls the options_menu for further actions
@@ -90,7 +88,6 @@ PUBLIC METHODS
 ## send_current_text
       sends current text to Matchmaker's filter API and displays the response
       
-PRIVATE METHODS
 ## get_integer
       A simple method to as ka user for an integer within range.
       
@@ -100,7 +97,6 @@ PRIVATE METHODS
 
 # Matchmaker::Matchmaker
 
-VARIABLES
 @source
       The currently active source API in the format ["NAME", "URL", "CODE"]
       e.g.: ["Official Joke API", 'https://official-joke-api.appspot.com/random_joke', "JOKE"]
@@ -115,8 +111,6 @@ VARIABLES
       
  @filters
       Same as sources, above, but with filter apis (APIS that can accept data and offer a response)
-
-PUBLIC METHODS
 
 # add_source
       Adds an API to matchmaker's sources array. Must be in the format ["NAME", "URL", "CODE"]
@@ -134,7 +128,6 @@ PUBLIC METHODS
 # make_me_a_match
       Sends current text to the filter API and updates the current text with the response
 
-Private Methods: 
 # update_text
       Updates the current text and saves to text_history
 
