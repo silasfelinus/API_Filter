@@ -51,26 +51,92 @@ Or install it yourself as:
 
     $ gem install matchmaker
 
-## Usage
+# Usage
 
-Global Variables:  
-@@sources - 
-@@filters -   
-@@default_text -  
-@@all - 
+# Matchmaker::CLI
+VARIABLES
+## @matchmaker
+      Stores the matchmaker abject that handles the api interactions.
 
-@source 
-@filter 
-@current_text 
-@text_history 
- 
-Public Methods: 
-fetch_me_a_text - 
-make_me_a_match -  
+PUBLIC METHODS
+## call
+      Initiates the matchmaker and walks the user through their first match
+      Then calls the options_menu for further actions
+      
+# cli_options_menu
+      Allows the user to select source and filter apis and manipulate the text
+      (The meat-and-potatoes of the CLI, currently gives an error when processing certain forms of text)
+      
+### welcome_user
+      Displays the user welcome message
+      I had a longer introduction here, but it was too wordy and was a distraction. 
+      Additional messaging for the CLI can easily be added, or the code refactored to pull from a welcome file
+
+## display_text
+      Displays matchmaker's current text
+
+## select_source
+      Displays the currently available source APIS,
+      and allows user to select the active API
+      
+## select_filter
+      Displays the currently available source APIS,
+      and allows user to select the active API
+      There's mopre than enough code smell here to suggest it should be merged with select_source
+      
+## get_new_text
+      Grabs and displays fresh source text from matchmaker
+      
+## send_current_text
+      sends current text to Matchmaker's filter API and displays the response
+      
+PRIVATE METHODS
+## get_integer
+      A simple method to as ka user for an integer within range.
+      
+## pause_for_effect
+      A simple method for pausing before a screen clear to display relevant data
+      
+
+# Matchmaker::Matchmaker
+
+VARIABLES
+@source
+      The currently active source API in the format ["NAME", "URL", "CODE"]
+      e.g.: ["Official Joke API", 'https://official-joke-api.appspot.com/random_joke', "JOKE"]
+@filter
+      The currently active filter API in the format  ["NAME", "URL", "CODE"]
+      e.g. ["Braille Translator", 'https://fastbraille.com/api/', "BRAILLE"]
+@sources
+      The default source APIs, curently stored as an array
+      Primate candidate for refactoring so it pulls data from a separate file
+      Super plus good bonus evolution would allow it to integrate with the larger collection of APIs at 
+      repositories like fungenerators.com
+      
+ @filters
+      Same as sources, above, but with filter apis (APIS that can accept data and offer a response)
+
+PUBLIC METHODS
+
+# add_source
+      Adds an API to matchmaker's sources array. Must be in the format ["NAME", "URL", "CODE"]
+      e.g. Matchmaker::Matchmaker.add_source(["Official Joke API", 'https://official-joke-api.appspot.com/random_joke', "JOKE"])
+
+# add_filter
+      Adds an API to matchmaker's filters array. Must be in the format ["NAME", "URL", "CODE"]
+      e.g. Matchmaker::Matchmaker.add_filter(["Braille Translator", 'https://fastbraille.com/api/', "BRAILLE"])
+      
+
+# fetch_me_a_text
+      grabs new text from the source API
+      e.g. Matchmaker::Matchmaker.fetch_me_a_text
+      
+# make_me_a_match
+      Sends current text to the filter API and updates the current text with the response
 
 Private Methods: 
-update_text
-process_data
+# update_text
+      Updates the current text and saves to text_history
 
 
 ## Development
@@ -81,15 +147,14 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/silasfelinus/api_filter. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [code of conduct](https://github.com/silasfelinus/api_filter/blob/master/CODE_OF_CONDUCT.md).
+Bug reports and pull requests are welcome on GitHub at https://github.com/silasfelinus/matchmaker. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [code of conduct](https://github.com/silasfelinus/matchmaker/blob/master/CODE_OF_CONDUCT.md).
 
 ## License
-
-The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
+Matchmaker is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
 
 ## Code of Conduct
 
-Everyone interacting in the ApiFilter project's codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/silasfelinus/api_filter/blob/master/CODE_OF_CONDUCT.md).
+Everyone interacting in Matchmaker's codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/silasfelinus/matchmaker/blob/master/CODE_OF_CONDUCT.md).
 
 
 ## Ideas for expansion/integration:
