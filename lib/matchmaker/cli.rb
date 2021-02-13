@@ -64,16 +64,16 @@ module Matchmaker
       # Grabs and displays fresh source text from Matchmaker
       puts "[Source] = '#{@matchmaker.source[0]}'\n\n"
       new_text = @matchmaker.fetch_me_a_text
-      puts "[Text Received]: \n'#{new_text}'\n\n"
+      #puts "[Text Received]: \n'#{new_text}'\n\n"
     end
 
 
     def send_current_text
       # sends current text to Matchmaker's filter 
       # API and displays the response
-      puts "[Text Sent] = '#{@matchmaker.current_text}'\n\n"
+      #puts "[Text Sent] = '#{@matchmaker.current_text}'\n\n"
       new_text = @matchmaker.make_me_a_match
-      puts "[Text Received] = '#{new_text}'\n\n"
+      #puts "[Text Received] = '#{new_text}'\n\n"
     end
 
 

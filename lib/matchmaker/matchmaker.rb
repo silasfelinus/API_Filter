@@ -9,7 +9,7 @@ module Matchmaker
       @sources = [["Official Joke API", 'https://official-joke-api.appspot.com/random_joke', "JOKE"],
                   ["Chuck Norris Jokes", 'https://api.chucknorris.io/jokes/random', "CHUCK"],
                   ["Quotes (Forismatic.com)", 'https://api.forismatic.com/api/1.0/?method=getQuote&lang=en&format=json', "QUOTE"],
-                  ["Random Facts", 'https://api.fungenerators.com', "FACTOID"],
+                  #["Random Facts", 'https://api.fungenerators.com', "FACTOID"],
                   ["'Poem of the Day' from Poems One", "https://api.poems.one/pod", "POEM"],
                   ["Custom Text", nil, "CUSTOM"]]
       @filters = [["Braille Translator", 'https://fastbraille.com/api/', "BRAILLE"],
