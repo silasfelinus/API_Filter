@@ -77,7 +77,6 @@ module Matchmaker
       # and updates the current text with the response
       #converted_url = @filter[1] + CGI.escape(@current_text.gsub(" ", "%20"))
       converted_url = @filter[1] + @current_text.gsub(" ", "%20")
-      binding.pry
       # Checks for filter response, or returns an error message
       begin
       new_data = HTTParty.get(converted_url.to_s)
