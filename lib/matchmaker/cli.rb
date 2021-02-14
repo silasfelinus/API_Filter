@@ -28,7 +28,7 @@ module Matchmaker
       puts "**************************************\n"
       puts "CURRENT TEXT:\n\n"
       puts "#{@matchmaker.current_text}\n\n"
-      puts "**************************************\n"
+      puts "**************************************\n\n"
     end
 
 
@@ -84,10 +84,10 @@ module Matchmaker
       we_are_done = false
       while we_are_done == false
         display_text
-        puts "1. Change text SOURCE (#{@matchmaker.source[0]})"
-        puts "2. Change text FILTER (#{@matchmaker.filter[0]})"
-        puts "3. Get new text from #{@matchmaker.source[0]}"
-        puts "4. Send current text to #{@matchmaker.filter[0]}"
+        puts "1. Change Source: #{@matchmaker.source[0]}"
+        puts "2. Change Filter: #{@matchmaker.filter[0]}"
+        puts "3. Source new text"
+        puts "4. Filter current text"
         puts "5. Quit\n"
         puts "\n"
 
