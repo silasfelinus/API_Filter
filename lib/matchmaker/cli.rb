@@ -84,10 +84,10 @@ module Matchmaker
       we_are_done = false
       while we_are_done == false
         display_text
-        puts "1. Choose text SOURCE (CURRENTLY #{@matchmaker.source[0]})"
-        puts "2. Choose text FILTER (CURRENTLY #{@matchmaker.filter[0]})"
-        puts "3. Get new text from SOURCE"
-        puts "4. Send current text to FILTER"
+        puts "1. Change text SOURCE (#{@matchmaker.source[0]})"
+        puts "2. Change text FILTER (#{@matchmaker.filter[0]})"
+        puts "3. Get new text from #{@matchmaker.source[0]}"
+        puts "4. Send current text to #{@matchmaker.filter[0]}"
         puts "5. Quit\n"
         puts "\n"
 

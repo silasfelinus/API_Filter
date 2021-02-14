@@ -68,15 +68,15 @@ module Matchmaker
             new_text = new_data
           end
         end
-      update_text(new_text)
       end
+      update_text(new_text)
     end
 
     def make_me_a_match
       # Sends current text to the filter API
       # and updates the current text with the response
       #converted_url = @filter[1] + CGI.escape(@current_text.gsub(" ", "%20"))
-      converted_url = @filter[1] + @current_text.gsub(" ", "%20")
+      converted_url = @filter[1] + @current_text.gsub(" ", "%20").gsub("\n", "%20")
       # Checks for filter response, or returns an error message
       begin
       new_data = HTTParty.get(converted_url.to_s)
