@@ -6,8 +6,7 @@
     4   Matchmaker::Matchmaker.look_through_your_book && 
     5   make_me(a_perfect_match)  
 
-        -inspired by "Matchmaker, Matchmaker" from Fiddler on the Roof, 
-      lyrics by Sheldon Harnick
+        -inspired by "Matchmaker, Matchmaker" from Fiddler on the Roof, lyrics by Sheldon Harnick
 
 Hi, I'm Matchmaker! 
 
@@ -52,90 +51,94 @@ Or install it yourself as:
     $ gem install matchmaker
 
 # Usage
+[![Matchmaker CLI Walkthrough ](https://img.youtube.com/vi/xKzzpiW77KY/0.jpg)](https://www.youtube.com/watch?v=xKzzpiW77KY)
 
-# Matchmaker::CLI
-VARIABLES
-## @matchmaker
-      Stores the matchmaker abject that handles the api interactions.
 
-PUBLIC METHODS
-## call
+
+
+### Matchmaker::CLI
+#### @matchmaker
+      Stores the matchmaker object that handles the api interactions.
+
+#### #call
       Initiates the matchmaker and walks the user through their first match
       Then calls the options_menu for further actions
       
-# cli_options_menu
+#### #cli_options_menu
       Allows the user to select source and filter apis and manipulate the text
       (The meat-and-potatoes of the CLI, currently gives an error when processing certain forms of text)
       
-### welcome_user
+#### #welcome_user
       Displays the user welcome message
       I had a longer introduction here, but it was too wordy and was a distraction. 
       Additional messaging for the CLI can easily be added, or the code refactored to pull from a welcome file
 
-## display_text
+#### #display_text
       Displays matchmaker's current text
 
-## select_source
+#### #select_source
       Displays the currently available source APIS,
       and allows user to select the active API
       
-## select_filter
+#### #select_filter
       Displays the currently available source APIS,
       and allows user to select the active API
       There's mopre than enough code smell here to suggest it should be merged with select_source
       
-## get_new_text
+#### #get_new_text
       Grabs and displays fresh source text from matchmaker
       
-## send_current_text
+#### #send_current_text
       sends current text to Matchmaker's filter API and displays the response
       
-PRIVATE METHODS
-## get_integer
+#### #get_integer
       A simple method to as ka user for an integer within range.
       
-## pause_for_effect
+#### #pause_for_effect
       A simple method for pausing before a screen clear to display relevant data
       
 
-# Matchmaker::Matchmaker
+### Matchmaker::Matchmaker
 
-VARIABLES
-@source
+#### @source
       The currently active source API in the format ["NAME", "URL", "CODE"]
       e.g.: ["Official Joke API", 'https://official-joke-api.appspot.com/random_joke', "JOKE"]
-@filter
+      
+      
+#### @filter
       The currently active filter API in the format  ["NAME", "URL", "CODE"]
       e.g. ["Braille Translator", 'https://fastbraille.com/api/', "BRAILLE"]
-@sources
+      
+      
+#### @sources
       The default source APIs, curently stored as an array
       Primate candidate for refactoring so it pulls data from a separate file
       Super plus good bonus evolution would allow it to integrate with the larger collection of APIs at 
       repositories like fungenerators.com
       
- @filters
+      
+ #### @filters
       Same as sources, above, but with filter apis (APIS that can accept data and offer a response)
+      
 
-PUBLIC METHODS
-
-# add_source
+#### #add_source
       Adds an API to matchmaker's sources array. Must be in the format ["NAME", "URL", "CODE"]
       e.g. Matchmaker::Matchmaker.add_source(["Official Joke API", 'https://official-joke-api.appspot.com/random_joke', "JOKE"])
+      
 
-# add_filter
+#### #add_filter
       Adds an API to matchmaker's filters array. Must be in the format ["NAME", "URL", "CODE"]
       e.g. Matchmaker::Matchmaker.add_filter(["Braille Translator", 'https://fastbraille.com/api/', "BRAILLE"])
       
 
-# fetch_me_a_text
+#### #fetch_me_a_text
       grabs new text from the source API
       e.g. Matchmaker::Matchmaker.fetch_me_a_text
       
-# make_me_a_match
+#### #make_me_a_match
       Sends current text to the filter API and updates the current text with the response
 
-Private Methods: 
-# update_text
+#### #update_text
       Updates the current text and saves to text_history
 
 
