@@ -51,8 +51,8 @@ Or install it yourself as:
     $ gem install matchmaker
 
 # Usage
+[![Matchmaker CLI Walkthrough ](https://img.youtube.com/vi/xKzzpiW77KY/0.jpg)](https://www.youtube.com/watch?v=xKzzpiW77KY)
 
-https://youtu.be/xKzzpiW77KY
 
 
 
