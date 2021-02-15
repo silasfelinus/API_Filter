@@ -47,32 +47,34 @@ module Matchmaker
       else
         new_data = HTTParty.get(@source[1])
         if new_data["error"]
-          puts "I'm sorry, the API returned an error:"
-          if new_data["error"]["message"]
-            puts new_data["error"]["message"]
-          end
+          someone_sent_me_an_error
         else
-          case  @source[2]
-          when "JOKE"
-            new_text = "#{new_data["setup"]} \n#{new_data["punchline"]}"
-          when "CHUCK"
-            new_text = (new_data["value"]).to_s
-          when "FACTOID"
-            new_text = (new_data["fact"]).to_s
-          when "QUOTE"
-            new_text = "#{new_data["quoteText"]} \n-#{new_data["quoteAuthor"]}"
-          when "POEM"
-            poem_data = new_data["contents"]["poems"]
-            title = poem_data[0]["poem"]["title"].to_s
-            poet = poem_data[0]["poem"]["author"].to_s
-            poem = poem_data[0]["poem"]["poem"].to_s
-            new_text = "#{title}\n#{poem}\n\n -#{poet}"
-          else
-            new_text = new_data
-          end
+          new_text = deal_me_some_data(new_data)
         end
       end
       update_text(new_text)
+    end
+
+    def deal_me_some_data(new_data)
+      case  @source[2]
+      when "JOKE"
+        new_text = "#{new_data["setup"]} \n#{new_data["punchline"]}"
+      when "CHUCK"
+        new_text = (new_data["value"]).to_s
+      when "FACTOID"
+        new_text = (new_data["fact"]).to_s
+      when "QUOTE"
+        new_text = "#{new_data["quoteText"]} \n-#{new_data["quoteAuthor"]}"
+      when "POEM"
+        poem_data = new_data["contents"]["poems"]
+        title = poem_data[0]["poem"]["title"].to_s
+        poet = poem_data[0]["poem"]["author"].to_s
+        poem = poem_data[0]["poem"]["poem"].to_s
+        new_text = "#{title}\n#{poem}\n\n -#{poet}"
+      else
+        new_text = new_data
+      end
+      new_text
     end
 
     def make_me_a_match
@@ -91,10 +93,7 @@ module Matchmaker
       begin
         new_data = HTTParty.get(converted_url.to_s)
         if new_data["error"]
-          puts "The API returned an error"
-          if new_data["error"]["message"]
-            puts new_data["error"]["message"]
-          end
+          someone_sent_me_an_error
         else
           new_text = case @filter[2]
                     when "BRAILLE"
@@ -127,5 +126,14 @@ module Matchmaker
       @text_history << @current_text
       new_text
     end
+
+    def someone_sent_me_an_error
+      #Handles error responses from APIs
+      puts "I'm sorry, the API returned an error:"
+      if new_data["error"]["message"]
+        puts new_data["error"]["message"]
+      end
+    end
+
   end
 end
