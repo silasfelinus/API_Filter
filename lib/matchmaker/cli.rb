@@ -86,7 +86,7 @@ module Matchmaker
         display_text
         puts "1. Change Source: #{@matchmaker.source[0]}"
         puts "2. Change Filter: #{@matchmaker.filter[0]}"
-        puts "3. Source new text"
+        puts "3. Get new text"
         puts "4. Filter current text"
         puts "5. Quit\n"
         puts "\n"

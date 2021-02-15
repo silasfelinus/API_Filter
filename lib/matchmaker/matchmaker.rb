@@ -2,7 +2,7 @@
 
 module Matchmaker
   class Matchmaker
-    attr_accessor :source, :filter, :current_text
+    attr_accessor :source, :filter, :current_text, :converted_text
     attr_reader :text_history, :sources, :filters
 
     def initialize()
@@ -40,14 +40,17 @@ module Matchmaker
 
 
     def fetch_me_a_text
-      # g=Grabs new text from the source API
+      # Grabs new text from the source API
       if @source[2] == "CUSTOM"
         puts "Please input your custom text:"
         new_text = gets.chomp
       else
         new_data = HTTParty.get(@source[1])
         if new_data["error"]
-          puts new_data["error"]["message"].text
+          puts "I'm sorry, the API returned an error:"
+          if new_data["error"]["message"]
+            puts new_data["error"]["message"]
+          end
         else
           case  @source[2]
           when "JOKE"
@@ -75,27 +78,36 @@ module Matchmaker
     def make_me_a_match
       # Sends current text to the filter API
       # and updates the current text with the response
+
       if @filter[2] == "BRAILLE"
-        converted_text = current_text.gsub(" ", "%20").gsub("\n", "%20")
+        converted_text = ERB::Util.url_encode(current_text.gsub("\r", ""))
       else
-        converted_text = current_text.gsub(" ", "%20")
+        converted_text = ERB::Util.url_encode(current_text.gsub("\r", "").gsub("\n", " "))
       end
-      converted_text = CGI.escape(converted_text) unless converted_text.ascii_only?
       converted_url = @filter[1] + converted_text
+
 
       # Checks for filter response, or returns an error message
       begin
-      new_data = HTTParty.get(converted_url.to_s)
-      new_text = case @filter[2]
-                 when "BRAILLE"
-                   (new_data["braille"]).to_s
-                 when "TRANSLATIONS"
-                   (new_data["contents"]["translated"]).to_s
-                # when NEWCODEGOESHERE
-                 else
-                   "Something went wrong. I don't have that filter configured properly"
-                 end
-      update_text(new_text)
+        new_data = HTTParty.get(converted_url.to_s)
+        if new_data["error"]
+          puts "The API returned an error"
+          if new_data["error"]["message"]
+            puts new_data["error"]["message"]
+          end
+        else
+          new_text = case @filter[2]
+                    when "BRAILLE"
+                      (new_data["braille"]).to_s
+                    when "TRANSLATIONS"
+                      (new_data["contents"]["translated"]).to_s
+                    # when NEWCODEGOESHERE
+                    else
+                      "Something went wrong. I don't have that filter configured properly"
+                    end
+                    
+          update_text(new_text)
+        end
       rescue => error_message
         puts "*************************"
         puts "Something went wrong."
