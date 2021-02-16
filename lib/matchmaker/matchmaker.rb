@@ -6,15 +6,15 @@ module Matchmaker
     attr_reader :text_history
 
     def initialize()
-      @source = @sources[0]
-      @filter = @filters[0]
+      @source = sources[0]
+      @filter = filters[0]
       @text_history = []
       @current_text = fetch_me_a_text
     end
     
     def sources
       # Default text source APIs
-      # this will look better pulling from an outside file and combining with filters 
+      # this will look better building a hash from an outside file
       [["Official Joke API", 'https://official-joke-api.appspot.com/random_joke', "JOKE"],
         ["Chuck Norris Jokes", 'https://api.chucknorris.io/jokes/random', "CHUCK"],
         ["Quotes (Forismatic.com)", 'https://api.forismatic.com/api/1.0/?method=getQuote&lang=en&format=json', "QUOTE"],
@@ -25,7 +25,7 @@ module Matchmaker
 
     def filters
       # Default text filter APIs
-      # this will look better pulling from an outside file and combining with sources 
+      # this will look better building a hash from an outside file
       [["Braille Translator", 'https://fastbraille.com/api/', "BRAILLE"],
       ["Klingon Translator", 'https://api.funtranslations.com/translate/klingon.json?text=', "TRANSLATIONS"],
       ["Russian Accent", 'https://api.funtranslations.com/translate/russian-accent.json?text=', "TRANSLATIONS"],
