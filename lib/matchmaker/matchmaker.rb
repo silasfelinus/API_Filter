@@ -2,33 +2,38 @@
 
 module Matchmaker
   class Matchmaker
-    attr_accessor :source, :filter, :current_text, :converted_text
-    attr_reader :text_history, :sources, :filters
+    attr_accessor :source, :filter, :current_text
+    attr_reader :text_history
 
     def initialize()
-      @sources = [["Official Joke API", 'https://official-joke-api.appspot.com/random_joke', "JOKE"],
-                  ["Chuck Norris Jokes", 'https://api.chucknorris.io/jokes/random', "CHUCK"],
-                  ["Quotes (Forismatic.com)", 'https://api.forismatic.com/api/1.0/?method=getQuote&lang=en&format=json', "QUOTE"],
-                  #["Random Facts", 'https://api.fungenerators.com', "FACTOID"],
-                  ["'Poem of the Day' from Poems One", "https://api.poems.one/pod", "POEM"],
-                  ["Custom Text", nil, "CUSTOM"]]
-      @filters = [["Braille Translator", 'https://fastbraille.com/api/', "BRAILLE"],
-                  ["Klingon Translator", 'https://api.funtranslations.com/translate/klingon.json?text=', "TRANSLATIONS"],
-                  ["Russian Accent", 'https://api.funtranslations.com/translate/russian-accent.json?text=', "TRANSLATIONS"],
-                  ["Pirate Translator", 'https://api.funtranslations.com/translate/pirate.json?text=', "TRANSLATIONS"]]
       @source = @sources[0]
       @filter = @filters[0]
       @text_history = []
       @current_text = fetch_me_a_text
     end
+    
+    def sources
+      # Default text source APIs
+      # this will look better pulling from 
+      # an outside file and combinging with filters
+      [["Official Joke API", 'https://official-joke-api.appspot.com/random_joke', "JOKE"],
+        ["Chuck Norris Jokes", 'https://api.chucknorris.io/jokes/random', "CHUCK"],
+        ["Quotes (Forismatic.com)", 'https://api.forismatic.com/api/1.0/?method=getQuote&lang=en&format=json', "QUOTE"],
+        ["Random Facts", 'https://api.fungenerators.com', "FACTOID"],
+        ["'Poem of the Day' from Poems One", "https://api.poems.one/pod", "POEM"],
+        ["Custom Text", nil, "CUSTOM"]]
+    end
 
     def filters
-      @filters
+      # Default text filter APIs
+      # this will look better pulling from 
+      # an outside file and combinging with sources
+      [["Braille Translator", 'https://fastbraille.com/api/', "BRAILLE"],
+      ["Klingon Translator", 'https://api.funtranslations.com/translate/klingon.json?text=', "TRANSLATIONS"],
+      ["Russian Accent", 'https://api.funtranslations.com/translate/russian-accent.json?text=', "TRANSLATIONS"],
+      ["Pirate Translator", 'https://api.funtranslations.com/translate/pirate.json?text=', "TRANSLATIONS"]]
     end
 
-    def sources
-      @sources
-    end
 
     def add_source(source)
       @sources << source
@@ -49,13 +54,16 @@ module Matchmaker
         if new_data["error"]
           someone_sent_me_an_error
         else
-          new_text = deal_me_some_data(new_data)
+          new_text = parse_data(new_data)
         end
       end
       update_text(new_text)
     end
 
-    def deal_me_some_data(new_data)
+    def parse_data(new_data)
+      # Processes the data based on the API formatting
+      # This is prime candidate for automating
+      # through an array of keyword
       case  @source[2]
       when "JOKE"
         new_text = "#{new_data["setup"]} \n#{new_data["punchline"]}"
@@ -80,14 +88,12 @@ module Matchmaker
     def make_me_a_match
       # Sends current text to the filter API
       # and updates the current text with the response
-
       if @filter[2] == "BRAILLE"
         converted_text = ERB::Util.url_encode(current_text.gsub("\r", ""))
       else
         converted_text = ERB::Util.url_encode(current_text.gsub("\r", "").gsub("\n", " "))
       end
       converted_url = @filter[1] + converted_text
-
 
       # Checks for filter response, or returns an error message
       begin
