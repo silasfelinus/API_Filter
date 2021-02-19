@@ -8,19 +8,13 @@ module Matchmaker
     attr_accessor :matchmaker
 
     def call
-      # Initializes the matchmaker and
-      # helps the user through the initial api match
-      #Then calls the menu for api management
+      # Initializes the matchmaker,
+      # helps the user through the initial api match,
+      # and calls the menu for api management
       @matchmaker = Matchmaker.new
-      welcome_user
-      cli_options_menu
-    end
-
-    def welcome_user
-      # Welcomes the user
-      # This used to be more verbose
       system("clear")
       puts "Welcome to Matchmaker!"
+      cli_options_menu
     end
 
     def display_text
@@ -33,12 +27,7 @@ module Matchmaker
 
 
     def select_source
-      # Displays the currently available source APIS,
-      # and allows user to select the active API
-      puts "AVAILABLE APIS:\n"
-      @matchmaker.sources.each_with_index do |source, index|
-        puts "#{index + 1} - #{source[0]} \n"
-      end
+      # Aallows user to select the active API
       @matchmaker.source = @matchmaker.sources[
         get_integer(1, @matchmaker.sources.length) - 1]
       system("clear")
@@ -47,17 +36,28 @@ module Matchmaker
 
 
     def select_filter
-      # Displays the currently available filter APIS,
-      # and allows user to select the active API
-      puts "AVAILABLE FILTERS:\n"
-      @matchmaker.filters.each_with_index do |filter, index|
-        puts "#{index + 1} - #{filter[0]}"
-      end
+      # Allows user to select the active API
       @matchmaker.filter = @matchmaker.filters[
         get_integer(1, @matchmaker.filters.length) - 1]
       puts "Your current filter is #{@matchmaker.filter[0]}"
     end
 
+    def display_apis(apis)
+      # Displays the currently available APIS
+      puts "AVAILABLE APIS:\n"
+      apis.each_with_index do |api, index|
+        puts "#{index + 1} - #{api[0]} \n"
+      end
+    end
+
+=begin
+    def select_active_api(apis, matchmaker_object)
+      matchmaker_object = apis[
+        get_integer(1, apis.length) - 1]
+      system("clear")
+      puts "Your current selection is #{@matchmaker.source[0]}"
+    end
+=end
 
     def get_new_text
       # Returns fresh text from matchamker's currently selected Source API
@@ -92,9 +92,11 @@ module Matchmaker
         system("clear")
         case selection
         when 1
+          display_apis(@matchmaker.sources)
           select_source
           get_new_text
         when 2
+          display_apis(@matchmaker.filters)
           select_filter
           send_current_text
         when 3
