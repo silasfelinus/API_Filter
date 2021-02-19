@@ -35,19 +35,19 @@ module Matchmaker
     end
 
     def default_source
-      @sources[0]
+      sources[0]
     end
 
     def default_filter
-      @filters[0]
+      filters[0]
     end
 
     def add_source(source)
-      @sources << source
+      sources << source
     end
 
     def add_filter(filter)
-      @filters << filter
+      filters << filter
     end
 
     def api_name(api)
