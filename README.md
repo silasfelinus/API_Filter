@@ -34,22 +34,6 @@ communication easier, not hidden under a candy cloud of falderall and fluff.
 (It is catchy, though).
 
 
-## Installation
-
-Add this line to your application's Gemfile:
-
-
-ruby gem 'matchmaker' 
-
-
-And then execute:
-
-    $ bundle install
-
-Or install it yourself as:
-
-    $ gem install matchmaker
-
 # Usage
 [![Matchmaker CLI Walkthrough ](https://img.youtube.com/vi/xKzzpiW77KY/0.jpg)](https://www.youtube.com/watch?v=xKzzpiW77KY)
 
